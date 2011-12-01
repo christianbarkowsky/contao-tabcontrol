@@ -21,13 +21,8 @@
  * PHP version 5
  * @copyright  Christian Barkowsky, Mirco Rahn, Jean-Bernard Valentaten 2009-2011
  * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Mirco Rahn <http://www.complus-ag.net>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
-<<<<<<< HEAD
  * @package    TabControl
  * @license    GNU/LGPL
-=======
- * @package    TabControl 
- * @license    GNU/LGPL 
->>>>>>> 405fb693cf638281c15178aab3686da41f71883b
  * @filesource
  */
 
