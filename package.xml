@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE contaopackage>
+<extension name="tabcontrol" date="20110811">
+    <author user="Brains" name="Jean-Bernard Valentaten" />
+    <copyright>&amp;copy; 2009-2011 by Jean-Bernard Valentaten</copyright>
+    <license>GNU Lesser Public License (LGPL)</license>
+    <classification type="free" category="application" />
+    <release version="10010049" build="9" date="20110213" />
+    <contao minversion="20070009" maxversion="20090039" />
+    <language code="de">
+        <translator user="Brains" name="Jean-Bernard Valentaten" />
+        <searchtags>tabs,tabcontrol,reiter</searchtags>
+        <title>TabControl Inhaltselement</title>
+        <teaser>Reiter (Tabs) als Inhaltselement anlegen</teaser>
+        <description>Erlaubt die einfache Erstellung von Reitern und Panelen in Artikeln
+      Die Funktionsweise ist an das Akkordeon-Element angelehnt um eine intuitive Bedienung 
+      anhand gelernter Vorgehensweisen zu gewährleisten.
+      Eine beliebige Anzahl an Reitern kann in einem Inhaltselement als Reitergruppe festgelegt 
+	  werden. Die Verhaltensweise dieser Reitegruppe wird im Inhaltselement definiert.
+      Die zugeordneten Panele werden mittels Start- und Stopelementen eingegrenzt, so
+      daß sie mit den bestehenden Inhaltselementen befüllt werden können.
+      Diese Erweiterung umfasst:
+      &lt;ul&gt;
+	    &lt;li&gt;TabControl Inhaltselement&lt;/li&gt;
+	    &lt;li&gt;MooTools-basiertes TabControl Plugin&lt;/li&gt;
+      &lt;/ul&gt;</description>
+        <releasenotes>Folgendes hat sich geändert:&lt;/li&gt;
+	  &lt;ul&gt;
+	  	&lt;li&gt;
+	  	  [Fix] Bei Elementen des Typs &quot;Panel Ende&quot; kann nun der Zugriffsschutz eingestellt werden. 
+	    &lt;/li&gt;
+		&lt;li&gt;
+		  [Change] Das beim Laden der Seite anzuzeigende Panel kann nun mittels eines Ankers (z.B. #myPane) 
+		  festgelegt werden. Somit können Panele direkt verlinkt werden. Falls auf einem Client JavaScript
+		  deaktiviert ist, scrollt der Browser automatisch auf das anzuzeigenden Panel. Somit ist die
+		  Barrierefreiheit gewährleistet.   
+		&lt;/li&gt;
+		&lt;li&gt;
+		  [Change] Die Kompatibilität zu Contao 2.9.3 ist seitens des Userforums mehrbach bestätigt
+		  und in dieses Release eingetragen worden.
+		&lt;/li&gt;
+	  &lt;/ul&gt;</releasenotes>
+    </language>
+    <language code="cs">
+        <translator user="frogzone" name="Tomas Petrlik" website="http://www.frogzone.cz" />
+        <searchtags>tabs,tabcontrol</searchtags>
+        <title>TabControl záložky</title>
+        <teaser>Vytvoření záložek jako prvku obsahu.</teaser>
+        <description>Allows the easy-as-can-be creation of tabs and panes in acticles
+      The functionality is based on the Accordion-element to ensure an intuitive use
+      based on learned workflows.
+	  An arbitratry amount of tabs can be created in a single content element as a tabgroup.
+	  The behaviour of that tabgroup is specified within the content element.
+	  The corresponding panes are wrapped within start- and stop-elements, so that
+      they can contain the usual ContentElements.
+      This extentions contains:
+      &lt;ul&gt;
+	    &lt;li&gt;TabControl ContentElement&lt;/li&gt;
+	    &lt;li&gt;MooTools-based TabControl plugin&lt;/li&gt;
+      &lt;/ul&gt;</description>
+        <releasenotes>Changes as follows:&lt;/li&gt;
+	  &lt;ul&gt;
+	  	&lt;li&gt;
+	  	  [Fix] It is now possible to protect elements of the type &quot;Pane End&quot;. 
+	    &lt;/li&gt;
+		&lt;li&gt;
+		  [Change] The pane that shall be displayed at page load can now be specified using
+		  an anchor (e.g. #myAnchor). Thus panes can now be linkted to directly. In case a client
+		  has deactivated JavaScript, the browser will automatically scroll to the correct pane.
+		&lt;/li&gt;
+		&lt;li&gt;
+		  [Change] Compatibility to Contao 2.9.3 has been corfirmed by the community and is now
+		  set in this release.
+		&lt;/li&gt;
+	  &lt;/ul&gt;</releasenotes>
+    </language>
+    <language code="ru">
+        <translator user="evgenioni" name="Eugene Rybyakov" website="http://contaotraining.com" />
+        <searchtags>tabs,tabcontrol</searchtags>
+        <title>Тип элемента &quot;Вкладки&quot;</title>
+        <teaser>Создает вкладки как часть статьи страницы</teaser>
+        <description>Модуль позволяет быстро создавать вкладки (или табы) с переключаемыми панелями в статьях.&lt;br /&gt; Функционал основан на элементе &quot;Аккордеон&quot;.&lt;br /&gt;В одном блоке контента может быть создано произвольное количество вкладок. Каждая панель оформлена метками начала и конца вкладок, внутри которых содержатся различные типы контента.&lt;br /&gt; Расширение содержит модуль и JS-плагин для mootools.</description>
+        <releasenotes>Изменения:
+&lt;ul&gt;
+&lt;li&gt;
+[Fix] Защита элемента &quot;Pane End&quot;. 
+&lt;/li&gt;
+&lt;li&gt;
+[Change] При загрузке страницы может быть отображена нужная панель по якорю (например, #myAnchor). Если у клиента будет отключен JavaScript, страница будет перемещена к якорю.
+&lt;/li&gt;
+&lt;li&gt;
+[Change] Добавлена совместимость с Contao 2.9.3.
+&lt;/li&gt;
+&lt;/ul&gt;</releasenotes>
+    </language>
+</extension>
