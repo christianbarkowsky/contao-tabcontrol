@@ -19,8 +19,8 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Jean-Bernard Valentaten 2009 
- * @author     Jean-Bernard Valentaten <troggy.brains@gmx.de> 
+ * @copyright  Christian Barkowsky, Mirco Rahn, Jean-Bernard Valentaten 2009-2011
+ * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Mirco Rahn <http://www.complus-ag.net>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
  * @package    TabControl 
  * @license    GNU/LGPL 
  * @filesource
@@ -30,8 +30,8 @@
 /**
  * Class ContentTabControl 
  *
- * @copyright  Jean-Bernard Valentaten 2009 
- * @author     Jean-Bernard Valentaten <troggy.brains@gmx.de> 
+ * @copyright  Christian Barkowsky, Mirco Rahn, Jean-Bernard Valentaten 2009-2011
+ * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Mirco Rahn <http://www.complus-ag.net>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
  * @package    Controller
  */
 class ContentTabControl extends ContentElement {
