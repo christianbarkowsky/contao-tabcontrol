@@ -9,10 +9,13 @@
  * @version 1.2
  * @license MIT-style license
  * @author Jean-Bernard Valentaten - <troggy [dot] brains [at] gmx [dot] de>
+ * @author Mirco Rahn - <m [dot] rahn [at] complus-ag [dot] de> 
+ * 
  * @copyright Author
  */
 
 //create class
+TC = new Array();
 TabControl = new Class();
 
 /**
@@ -35,10 +38,12 @@ TabControl.prototype = {
      * @param {Element,String} element The element that will be used as container for the tab-control
      * @param {Object} [options] The options as seen above
      */
+    
+    
     initialize: function(element, options) {
         //init vars
-        var tabcontrol = this;
-        
+        //var tabcontrol = this;
+        //console.log('TabControl.init');
         //init datamembers
         this.element = $(element);
         this.options = $extend({
@@ -46,7 +51,11 @@ TabControl.prototype = {
             hoverClass: '',
             initialTab: '',
             onChange: $empty,
-            selectedClass: ''
+            selectedClass: '',
+            autoSlide: false,
+            delay: 5000,
+            bgOverlayTab: '',
+            bgOverlayCss: ''
         }, options);
         this.panes = new Array();
         this.tabs = new Array();
@@ -57,26 +66,35 @@ TabControl.prototype = {
         this.initialTab = this.options.initialTab;
         this.onChange = this.options.onChange;
         this.selectedClass = this.options.selectedClass;
+        this.bgOverlayTab = this.options.bgOverlayTab;
+        this.bgOverlayCss = this.options.bgOverlayCss;
         
         //init tabs and panes
         this._initTabs();
         this._initPanes();
         
+        // for Autoplay
+        this.maxIndex = 0;
+        this.currentIndex= 0;
+
         //redefault initial tab if needed and have it displayed
         if (!this.initialTab) {
             //init local vars
-        	var anchoredPane = $(location.hash.substr(1));
+            var anchoredPane = $(location.hash.substr(1));
             var initialIndex = 0;
             
             //check whether URIs anchor can be found in our panes
             if (anchoredPane) this.panes.each(function(pane, index) {
-            	if (anchoredPane === pane) initialIndex = index;
+                if (anchoredPane === pane) initialIndex = index;
             }); 
             
             //and apply what we have computed
             this.initialTab = this.tabs[initialIndex];
         }
         this.selectTab(null, this.initialTab);
+        if(this.options.autoSlide){
+            this.addControl();
+        }
     },
     
     /**
@@ -171,6 +189,7 @@ TabControl.prototype = {
      */
     highlightTab: function(tab) {
         //if no hoverClass is defined, we terminate
+        
         if (!this.hoverClass) return;
         
         //if tab does not have hoverClass, we add it
@@ -198,9 +217,12 @@ TabControl.prototype = {
                 if (this.panes[n]) this.panes[n].setStyle('display', 'block');
                 currentPane = this.panes[n];
                 currentTab    = s;
+                if(this.bgOverlayTab) {$(this.bgOverlayTab).addClass(this.bgOverlayCss + n);}
+                this.currentIndex = n;
             } else {
                 s.removeClass(this.selectedClass);
                 if (this.panes[n]) this.panes[n].setStyle('display', 'none');
+                if(this.bgOverlayTab) {$(this.bgOverlayTab).removeClass(this.bgOverlayCss + n);}
             }
         }, this);
         
@@ -239,5 +261,33 @@ TabControl.prototype = {
         
         //if tab does have hoverClass, we remove it
         if (tab.hasClass(this.hoverClass)) tab.removeClass(this.hoverClass);
+    },
+    
+    // new Autoplay ...
+    skipNext: function(option){
+        this.currentIndex += 1;
+        if(this.currentIndex >= this.tabs.length){
+            this.currentIndex = 0;
+        }
+        this.selectTabByIndex(this.currentIndex);
+    },
+
+    pauseSlide: function(){
+        $clear(this.autoSlide);
+    },
+    continueSlide: function(){
+        this.autoSlide = this.skipNext.periodical(this.options.delay, this);
+    },
+    
+    addControl: function(){
+        if(this.tabs != undefined){
+            this.tabs.each(function(s) {
+                var elem = $(s);
+                elem.addEvent('mouseover', this.pauseSlide.bind(this, elem));
+                elem.addEvent('mouseout', this.continueSlide.bind(this, elem));
+            }, this);
+        }
+        this.autoSlide = this.skipNext.periodical(this.options.delay, this);
     }
+    
 };

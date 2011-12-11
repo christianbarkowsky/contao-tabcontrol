@@ -1,4 +1,7 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
+
+if (!defined('TL_ROOT'))
+    die('You can not access this file directly!');
 
 /**
  * TYPOlight webCMS
@@ -26,7 +29,6 @@
  * @filesource
  */
 
-
 /**
  * Class ContentTabControl
  *
@@ -34,126 +36,122 @@
  * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Mirco Rahn <http://www.complus-ag.net>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
  * @package    Controller
  */
-class ContentTabControl extends ContentElement
-{
-	/**
-	 * Contains the default classes used in our
-	 * tab-template
-	 *
-	 * @staticvar array
-	 * @access private
-	 */
-	private static $defaultClasses = array('tabs', 'panes');
+class ContentTabControl extends ContentElement {
 
+    /**
+     * Contains the default classes used in our
+     * tab-template
+     *
+     * @staticvar array
+     * @access private
+     */
+    private static $defaultClasses = array('tabs', 'panes');
 
-	/**
-	 * Contains the path to the js-plugin needed for Tabcontrols to work
-	 *
-	 * @var string
-	 * @access private
-	 */
-	private $strPlugin = 'plugins/tabcontrol/tabcontrol.js';
+    /**
+     * Contains the path to the js-plugin needed for Tabcontrols to work
+     *
+     * @var string
+     * @access private
+     */
+    private $strPlugin = 'plugins/tabcontrol/tabcontrol.js';
 
+    /**
+     * The template
+     *
+     * @var string
+     * @access protected
+     */
+    protected $strTemplate = 'ce_tabcontrol_tab';
 
-	/**
-	 * The template
-	 *
-	 * @var string
-	 * @access protected
-	 */
-	protected $strTemplate = 'ce_tabcontrol_tab';
+    /**
+     * Generate content element
+     */
+    protected function compile() {
+        //init vars
+        $classes = deserialize($this->tabClasses); //come all ye classes ;)
+        $titles = deserialize($this->tabTitles); //will only be filled when in tab-mode
+        static $panelIndex = 0;       //static index counter
+        //default classes if neccessary
+        if (!count($classes)) {
+            $classes = self::$defaultClasses;
+        } else {
+            if (!strlen($classes[0]))
+                $classes[0] = self::$defaultClasses[0];
+            if (!strlen($classes[1]))
+                $classes[1] = self::$defaultClasses[1];
+        }
 
+        //take some measures depending on the selected tab type
+        switch ($this->tabType) {
+            case 'tabcontrolstart':
+                //start a new panel
+                if (TL_MODE == 'FE') {
+                    $this->strTemplate = 'ce_tabcontrol_start';
+                    $this->Template = new FrontendTemplate($this->strTemplate);
+                } else {
+                    $this->strTemplate = 'be_wildcard';
+                    $this->Template = new BackendTemplate($this->strTemplate);
+                    $this->Template->wildcard = '### TabControl: ' . (++$panelIndex) . '. Pane START ###';
+                }
+                break;
 
-	/**
-	 * Generate content element
-	 */
-	protected function compile()
-	{
-		//init vars
-		$classes	= deserialize($this->tabClasses);	//come all ye classes ;)
-		$titles		= deserialize($this->tabTitles);	//will only be filled when in tab-mode
-		static $panelIndex = 0;							//static index counter
+            case 'tabcontrolstop':
+                //stop the current panel
+                if (TL_MODE == 'FE') {
+                    $this->strTemplate = 'ce_tabcontrol_stop';
+                    $this->Template = new FrontendTemplate($this->strTemplate);
+                } else {
+                    $this->strTemplate = 'be_wildcard';
+                    $this->Template = new BackendTemplate($this->strTemplate);
+                    $this->Template->wildcard = '### TabControl: ' . $panelIndex . '. Pane END ###';
+                }
+                break;
 
-		//default classes if neccessary
-		if (!count($classes))
-		{
-			$classes = self::$defaultClasses;
-		} else
-		{
-			if (!strlen($classes[0])) $classes[0] = self::$defaultClasses[0];
-			if (!strlen($classes[1])) $classes[1] = self::$defaultClasses[1];
-		}
+            case 'tabcontroltab':
+            default:
+                //display some tabs and check whether we need to append our plugin
+                if (TL_MODE == 'FE') {
+                    //make sure our plugin will be loaded
+                    if (!is_array($GLOBALS['TL_JAVASCRIPT'])) {
+                        $GLOBALS['TL_JAVASCRIPT'] = array($this->strPlugin);
+                    } elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT'])) {
+                        $GLOBALS['TL_JAVASCRIPT'][] = $this->strPlugin;
+                    }
 
-		//take some measures depending on the selected tab type
-		switch ($this->tabType)
-		{
-			case 'tabcontrolstart':
-				//start a new panel
-				if (TL_MODE=='FE')
-				{
-					$this->strTemplate = 'ce_tabcontrol_start';
-					$this->Template = new FrontendTemplate($this->strTemplate);
-				} else
-				{
-					$this->strTemplate = 'be_wildcard';
-					$this->Template = new BackendTemplate($this->strTemplate);
-					$this->Template->wildcard = '### TabControl: '.(++$panelIndex).'. Pane START ###';
-				}
-				break;
+                    //finally, we set template
+                    $this->Template = new FrontendTemplate($this->strTemplate);
+                } else {
+                    $titleList = '';
+                    foreach ($titles as $index => $title) {
+                        $titleList .=++$index . '. ' . $title . '<br/>';
+                    }
 
-			case 'tabcontrolstop':
-				//stop the current panel
-				if (TL_MODE=='FE')
-				{
-					$this->strTemplate = 'ce_tabcontrol_stop';
-					$this->Template = new FrontendTemplate($this->strTemplate);
-				} else
-				{
-					$this->strTemplate = 'be_wildcard';
-					$this->Template = new BackendTemplate($this->strTemplate);
-					$this->Template->wildcard = '### TabControl: '.$panelIndex.'. Pane END ###';
-				}
-				break;
+                    $this->strTemplate = 'be_wildcard';
+                    $this->Template = new BackendTemplate($this->strTemplate);
+                    $this->Template->wildcard = '### TabControl: Tabs ###';
+                    $this->Template->title = $titleList;
+                }
+        }
 
-			case 'tabcontroltab':
-			default:
-				//display some tabs and check whether we need to append our plugin
-				if (TL_MODE=='FE')
-				{
-					//make sure our plugin will be loaded
-					if (!is_array($GLOBALS['TL_JAVASCRIPT']))
-					{
-						$GLOBALS['TL_JAVASCRIPT'] = array($this->strPlugin);
-					} elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT']))
-					{
-						$GLOBALS['TL_JAVASCRIPT'][] = $this->strPlugin;
-					}
+        // Check Contao Version
+        if (version_compare(VERSION . '.' . BUILD, '2.10.0', '<')) {
+            $this->Template->tab_tpl_control = ".article";
+        } else {
+            $this->Template->tab_tpl_control = "article.mod_article";
+        }
 
-					//finally, we set template
-					$this->Template = new FrontendTemplate($this->strTemplate);
-				} else
-				{
-					$titleList = '';
-					foreach($titles as $index=>$title)
-					{
-						$titleList .= ++$index.'. '.$title.'<br/>';
-					}
+        //and pass it all to the template
+        $this->Template->behaviour = $this->tabBehaviour;
+        $this->Template->panes = $classes[1];
+        $this->Template->panesSelector = '.' . str_replace(' ', '.', $classes[1]);
+        $this->Template->tabs = $classes[0];
+        $this->Template->tabsSelector = '.' . str_replace(' ', '.', $classes[0]);
+        $this->Template->titles = $titles;
+        $this->Template->id = $this->id;
+        $this->Template->tab_autoplay_autoSlide = $this->tab_autoplay_autoSlide;
+        $this->Template->tab_autoplay_delay = $this->tab_autoplay_delay;
+    }
 
-					$this->strTemplate = 'be_wildcard';
-					$this->Template = new BackendTemplate($this->strTemplate);
-					$this->Template->wildcard = '### TabControl: Tabs ###';
-					$this->Template->title = $titleList;
-				}
-		}
-
-		//and pass it all to the template
-		$this->Template->behaviour		= $this->tabBehaviour;
-		$this->Template->panes			= $classes[1];
-		$this->Template->panesSelector	= '.'.str_replace(' ', '.', $classes[1]);
-		$this->Template->tabs			= $classes[0];
-		$this->Template->tabsSelector	= '.'.str_replace(' ', '.', $classes[0]);
-		$this->Template->titles			= $titles;
-	}
 }
 
 ?>
