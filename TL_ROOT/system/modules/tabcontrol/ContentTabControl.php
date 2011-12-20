@@ -1,7 +1,4 @@
-<?php
-
-if (!defined('TL_ROOT'))
-    die('You can not access this file directly!');
+<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 /**
  * TYPOlight webCMS
@@ -131,13 +128,6 @@ class ContentTabControl extends ContentElement {
                     $this->Template->wildcard = '### TabControl: Tabs ###';
                     $this->Template->title = $titleList;
                 }
-        }
-
-        // Check Contao Version
-        if (version_compare(VERSION . '.' . BUILD, '2.10.0', '<')) {
-            $this->Template->tab_tpl_control = ".article";
-        } else {
-            $this->Template->tab_tpl_control = "article.mod_article";
         }
 
         //and pass it all to the template
