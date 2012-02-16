@@ -107,12 +107,40 @@ class ContentTabControl extends ContentElement {
             case 'tabcontroltab':
             default:
                 //display some tabs and check whether we need to append our plugin
-                if (TL_MODE == 'FE') {
+                if (TL_MODE == 'FE')
+                {
                     //make sure our plugin will be loaded
-                    if (!is_array($GLOBALS['TL_JAVASCRIPT'])) {
-                        $GLOBALS['TL_JAVASCRIPT'] = array($this->strPlugin);
-                    } elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT'])) {
-                        $GLOBALS['TL_JAVASCRIPT'][] = $this->strPlugin;
+                    if (!is_array($GLOBALS['TL_JAVASCRIPT']))
+                    {
+                    	// Hook
+                    	if (isset($GLOBALS['TL_HOOKS']['tabControlJS']) && is_array($GLOBALS['TL_HOOKS']['tabControlJS']))
+						{
+							foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback)
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]();
+							}
+						}
+						else
+						{
+							$GLOBALS['TL_JAVASCRIPT'] = array($this->strPlugin);
+						}
+                    }
+                    elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT']))
+                    {
+                    	// Hook
+                    	if (isset($GLOBALS['TL_HOOKS']['tabControlJS']) && is_array($GLOBALS['TL_HOOKS']['tabControlJS']))
+						{
+							foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback)
+							{
+								$this->import($callback[0]);
+								$this->$callback[0]->$callback[1]();
+							}
+						}
+						else
+						{
+                        	$GLOBALS['TL_JAVASCRIPT'][] = $this->strPlugin;
+                        }
                     }
 
                     //finally, we set template
