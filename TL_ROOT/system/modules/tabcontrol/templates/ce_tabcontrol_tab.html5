@@ -4,7 +4,7 @@
     function loadTabControl_<?php echo $this->id; ?>() {
         window.TC_<?php echo $this->id; ?> = new Array();
         i = 0;
-        $$('article.mod_article').each(function(s) {
+        $$('<?php echo $this->articleAlias; ?>').each(function(s) {
             i++;
             elements = s.getElements('<?php echo $this->tabsSelector; ?>');
             if(elements.length){
