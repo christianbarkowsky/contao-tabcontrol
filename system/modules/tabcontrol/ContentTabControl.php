@@ -195,7 +195,7 @@ class ContentTabControl extends ContentElement
         }
 
         return null;
-    }
+    }    
 }
 
 ?>
