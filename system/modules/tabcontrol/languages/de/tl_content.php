@@ -19,8 +19,8 @@
  * Software Foundation website at http://www.gnu.org/licenses/.
  *
  * PHP version 5
- * @copyright  Christian Barkowsky, Mirco Rahn, Jean-Bernard Valentaten 2009-2011
- * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Mirco Rahn <http://www.complus-ag.net>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
+ * @copyright  Christian Barkowsky, Jean-Bernard Valentaten 2009-2011
+ * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
  * @package    TabControl
  * @license    GNU/LGPL
  * @filesource
@@ -49,9 +49,10 @@ $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrolstart']['0'] = "Panel
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrolstart']['1'] = "Markiert den Anfang eines neuen Panels, das mehrere Inhaltselement umfasst.";
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrolstop']['0'] = "Panel Ende";
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrolstop']['1'] = "Markiert das Ende eines Panel, das mehrere Inhaltselemente umfasst.";
-$GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontroltab']['0'] = "Reitergruppe";
+$GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontroltab']['0'] = "Reitergruppe - Start";
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontroltab']['1'] = "Erzeugt eine neue Gruppe von Reitern.";
-
+$GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrol_end']['0'] = "Reitergruppe - Ende";
+$GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrol_end']['1'] = "Markiert das Ende der Reitergruppe.";
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_autoSlide'] = array('Autoplay aktiv', 'Autoplay aktivieren.');
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'] = array('Einblendungsdauer', 'Angabe in Millisekunden.');
 
