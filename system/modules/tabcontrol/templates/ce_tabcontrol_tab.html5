@@ -1,0 +1,47 @@
+<!-- indexer::stop -->
+<script type="text/javascript">
+/* <![CDATA[ */
+    function loadTabControl_<?php echo $this->id; ?>() {
+        window.TC_<?php echo $this->id; ?> = new Array();
+        i = 0;
+        $$('<?php echo $this->articleAlias; ?>').each(function(s) {
+            i++;
+            elements = s.getElements('<?php echo $this->tabsSelector; ?>');
+            if(elements.length){
+                window.TC_<?php echo $this->id; ?>[i] = new TabControl(s, {
+<?php if ($this->tab_autoplay_autoSlide): ?>
+                    autoSlide: true,
+<?php endif; ?>
+<?php if ($this->tab_autoplay_delay): ?>
+                    delay: <?php echo $this->tab_autoplay_delay; ?>,
+<?php endif; ?>
+                    behaviour: '<?php echo $this->behaviour; ?>',
+                    tabs: s.getElements('<?php echo $this->tabsSelector; ?>'),
+                    panes: s.getElements('<?php echo $this->panesSelector; ?>'),
+                    selectedClass: 'selected',
+                    hoverClass: 'hover'
+                });
+            }
+        });
+    }
+
+	/*
+	 * Bootstrap
+	 */
+	window.addEvent('domready', loadTabControl_<?php echo $this->id; ?>);
+/* ]]> */
+</script>
+<!-- indexer::continue -->
+
+<div class="<?php echo $this->class; ?>_tabs block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+
+<?php if ($this->headline): ?>
+<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+<?php endif; ?>
+
+<ul>
+<?php foreach ($this->titles as $title) : ?>
+	<li class="<?php echo $this->tabs; ?>"><?php echo $title; ?></li>
+<?php endforeach; ?>
+</ul>
+</div>
