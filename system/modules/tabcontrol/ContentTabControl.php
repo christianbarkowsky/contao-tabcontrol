@@ -136,6 +136,7 @@ class ContentTabControl extends ContentElement
                 if (TL_MODE == 'FE')
                 {
                     $this->Template = new FrontendTemplate('ce_tabcontrol_start');
+                    $this->Template->paneindex = ++$panelIndex;
                 } else
                 {
                     $this->Template = new BackendTemplate('be_wildcard');
