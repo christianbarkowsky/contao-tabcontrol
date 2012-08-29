@@ -38,6 +38,12 @@
  */
 class ContentTabControl extends ContentElement
 {
+	/**
+     * Template
+     */
+    protected $strTemplate = 'ce_tabcontrol_tab';
+
+
     /**
      * Contains the default classes used in our tab-template
      */
@@ -48,12 +54,6 @@ class ContentTabControl extends ContentElement
      * Contains the path to the js-plugin needed for Tabcontrols to work
      */
     private $strPlugin = 'plugins/tabcontrol/tabcontrol.js';
-
-
-    /**
-     * The template
-     */
-    protected $strTemplate = 'ce_tabcontrol_tab';
 
 
     /**
@@ -78,46 +78,14 @@ class ContentTabControl extends ContentElement
                 $classes[1] = self::$defaultClasses[1];
         }
 
-        //take some measures depending on the selected tab type
         switch ($this->tabType)
         {
-            case 'tabcontrolstart':
-                //start a new panel
-                if (TL_MODE == 'FE')
-                {
-                    $this->strTemplate = 'ce_tabcontrol_start';
-                    $this->Template = new FrontendTemplate($this->strTemplate);
-                } else
-                {
-                    $this->strTemplate = 'be_wildcard';
-                    $this->Template = new BackendTemplate($this->strTemplate);
-                    $this->Template->wildcard = '### TabControl: ' . (++$panelIndex) . '. Pane START ###';
-                }
-                break;
-
-            case 'tabcontrolstop':
-                //stop the current panel
-                if (TL_MODE == 'FE')
-                {
-                    $this->strTemplate = 'ce_tabcontrol_stop';
-                    $this->Template = new FrontendTemplate($this->strTemplate);
-                } else
-                {
-                    $this->strTemplate = 'be_wildcard';
-                    $this->Template = new BackendTemplate($this->strTemplate);
-                    $this->Template->wildcard = '### TabControl: ' . $panelIndex . '. Pane END ###';
-                }
-                break;
-
-            case 'tabcontroltab':
-            default:
-                //display some tabs and check whether we need to append our plugin
+        	// Tabcontrol - start & tabs
+        	case 'tabcontroltab':
 				if (TL_MODE == 'FE')
 				{
-					//make sure our plugin will be loaded
 					if (!is_array($GLOBALS['TL_JAVASCRIPT']))
 					{
-						// Hook
 						if (isset($GLOBALS['TL_HOOKS']['tabControlJS']) && is_array($GLOBALS['TL_HOOKS']['tabControlJS']))
 						{
 							foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback)
@@ -133,7 +101,6 @@ class ContentTabControl extends ContentElement
 					}
 					elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT']))
 					{
-						// Hook
 						if (isset($GLOBALS['TL_HOOKS']['tabControlJS']) && is_array($GLOBALS['TL_HOOKS']['tabControlJS']))
 						{
 							foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback)
@@ -148,7 +115,6 @@ class ContentTabControl extends ContentElement
 						}
 					}
 
-					//finally, we set template
 					$this->Template = new FrontendTemplate($this->strTemplate);
                 } else
                 {
@@ -159,12 +125,48 @@ class ContentTabControl extends ContentElement
                         $titleList .=++$index . '. ' . $title . '<br/>';
                     }
 
-                    $this->strTemplate = 'be_wildcard';
-                    $this->Template = new BackendTemplate($this->strTemplate);
-                    $this->Template->wildcard = '### TabControl: Tabs ###';
+                    $this->Template = new BackendTemplate('be_wildcard');
+                    $this->Template->wildcard = '### TabControl START: Tabs ###';
                     $this->Template->title = $titleList;
                 }
-        }
+                break;
+        
+            // Panel - start
+            case 'tabcontrolstart':
+                if (TL_MODE == 'FE')
+                {
+                    $this->Template = new FrontendTemplate('ce_tabcontrol_start');
+                } else
+                {
+                    $this->Template = new BackendTemplate('be_wildcard');
+                    $this->Template->wildcard = '### TabControl: ' . (++$panelIndex) . '. Pane START ###';
+                }
+                break;
+
+            // Panel - stop
+            case 'tabcontrolstop':
+                if (TL_MODE == 'FE')
+                {
+                    $this->Template = new FrontendTemplate('ce_tabcontrol_stop');
+                } else
+                {
+                    $this->Template = new BackendTemplate('be_wildcard');
+                    $this->Template->wildcard = '### TabControl: ' . $panelIndex . '. Pane END ###';
+                }
+                break;
+                
+            // Tabcontrol - end
+            case 'tabcontrol_end':
+            default:
+            	if (TL_MODE == 'FE')
+                {
+                	$this->Template = new FrontendTemplate('ce_tabcontrol_end');
+	            } else {
+		           	$this->Template = new BackendTemplate('be_wildcard');
+                    $this->Template->wildcard = '### TabControl END ###';
+	            }
+            	break;
+          }
 
         $articleAlias = $this->getArticleAlias($this->pid);
 
@@ -179,8 +181,6 @@ class ContentTabControl extends ContentElement
         $this->Template->articleAlias = $articleAlias ? "#" . $articleAlias : ".mod_article";
         $this->Template->tab_autoplay_autoSlide = $this->tab_autoplay_autoSlide;
         $this->Template->tab_autoplay_delay = $this->tab_autoplay_delay;
-        
-        $this->Template->class = 'klasse';
     }
 
 
