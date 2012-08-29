@@ -39,7 +39,7 @@
 	<<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 	<?php endif; ?>
 
-	<div class="ce_tabcontrol_tabs block">
+	<div class="tabcontrol_tabs block">
 		<ul>
 			<?php foreach ($this->titles as $title) : ?>
 			<li class="<?php echo $this->tabs; ?>"><?php echo $title; ?></li>
