@@ -38,8 +38,14 @@
  */
 class ContentTabControl extends ContentElement
 {
+	/**
+	 * Template
+     */
+    protected $strTemplate = 'ce_tabcontrol'; //ce_tabcontrol_tab';
+    
+    
     /**
-     * Contains the default classes used in our tab-template
+     * Default classes
      */
     private static $defaultClasses = array('tabs', 'panes');
 
@@ -51,19 +57,14 @@ class ContentTabControl extends ContentElement
 
 
     /**
-     * The template
-     */
-    protected $strTemplate = 'ce_tabcontrol_tab';
-
-
-    /**
-     * Generate content element
+     * Generate the content element
      */
     protected function compile()
     {
         //init vars
         $classes = deserialize($this->tabClasses); //come all ye classes ;)
         $titles = deserialize($this->tabTitles); //will only be filled when in tab-mode
+        
         static $panelIndex = 0; //static index counter
 
         //default classes if neccessary
@@ -167,6 +168,7 @@ class ContentTabControl extends ContentElement
         }
 
         $articleAlias = $this->getArticleAlias($this->pid);
+        $this->Template->articleAlias = $articleAlias ? "#" . $articleAlias : ".mod_article";
 
         //and pass it all to the template
         $this->Template->behaviour = $this->tabBehaviour;
@@ -176,7 +178,7 @@ class ContentTabControl extends ContentElement
         $this->Template->tabsSelector = '.' . str_replace(' ', '.', $classes[0]);
         $this->Template->titles = $titles;
         $this->Template->id = $this->id;
-        $this->Template->articleAlias = $articleAlias ? "#" . $articleAlias : ".mod_article";
+        
         $this->Template->tab_autoplay_autoSlide = $this->tab_autoplay_autoSlide;
         $this->Template->tab_autoplay_delay = $this->tab_autoplay_delay;
     }
