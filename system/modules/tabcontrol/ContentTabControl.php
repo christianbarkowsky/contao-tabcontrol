@@ -21,7 +21,7 @@
  * Software Foundation website at <http://www.gnu.org/licenses/>.
  *
  * PHP version 5
- * @copyright  Christian Barkowsky, Mirco Rahn, Jean-Bernard Valentaten 2009-2012
+ * @copyright  Christian Barkowsky, Jean-Bernard Valentaten 2009-2012
  * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
  * @package    TabControl
  * @license    GNU/LGPL
