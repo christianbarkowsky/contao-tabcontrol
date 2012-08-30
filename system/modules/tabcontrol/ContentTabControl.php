@@ -167,19 +167,21 @@ class ContentTabControl extends ContentElement
                     $this->Template->wildcard = '### TabControl END ###';
 	            }
             	break;
-          }
+        }
+
+
+        $this->Template->id = $this->id;
 
         $articleAlias = $this->getArticleAlias($this->pid);
+        $this->Template->articleAlias = $articleAlias ? "#" . $articleAlias : ".mod_article";
 
-        //and pass it all to the template
         $this->Template->behaviour = $this->tabBehaviour;
         $this->Template->panes = $classes[1];
         $this->Template->panesSelector = '.' . str_replace(' ', '.', $classes[1]);
         $this->Template->tabs = $classes[0];
         $this->Template->tabsSelector = '.' . str_replace(' ', '.', $classes[0]);
         $this->Template->titles = $titles;
-        $this->Template->id = $this->id;
-        $this->Template->articleAlias = $articleAlias ? "#" . $articleAlias : ".mod_article";
+        
         $this->Template->tab_autoplay_autoSlide = $this->tab_autoplay_autoSlide;
         $this->Template->tab_autoplay_delay = $this->tab_autoplay_delay;
     }
