@@ -55,6 +55,7 @@ $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrol_end']['0'] = "Reiter
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrol_end']['1'] = "Markiert das Ende der Reitergruppe.";
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_autoSlide'] = array('Autoplay aktiv', 'Autoplay aktivieren.');
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'] = array('Einblendungsdauer', 'Angabe in Millisekunden.');
+$GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_fade'] = array('Fade aktivieren', 'Elemente werden ein- und ausgeblendet.');
 
 
 /**

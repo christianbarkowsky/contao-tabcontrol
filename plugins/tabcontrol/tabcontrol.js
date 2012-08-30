@@ -55,7 +55,8 @@ TabControl.prototype = {
             autoSlide: false,
             delay: 5000,
             bgOverlayTab: '',
-            bgOverlayCss: ''
+            bgOverlayCss: '',
+            addFade: false
         }, options);
         this.panes = new Array();
         this.tabs = new Array();
@@ -68,6 +69,7 @@ TabControl.prototype = {
         this.selectedClass = this.options.selectedClass;
         this.bgOverlayTab = this.options.bgOverlayTab;
         this.bgOverlayCss = this.options.bgOverlayCss;
+        this.addFade = this.options.addFade;
         
         //init tabs and panes
         this._initTabs();
@@ -214,14 +216,32 @@ TabControl.prototype = {
         this.tabs.each(function(s, n) {
             if (s===tab) {
                 s.addClass(this.selectedClass);
-                if (this.panes[n]) this.panes[n].setStyle('display', 'block');
+                
+                if(this.addFade)
+                {
+	                if (this.panes[n]) this.panes[n].setStyle('display', 'block').fade('in');
+                }
+                else
+                {
+	                if (this.panes[n]) this.panes[n].setStyle('display', 'block');
+                }
+                
                 currentPane = this.panes[n];
                 currentTab    = s;
                 if(this.bgOverlayTab) {$(this.bgOverlayTab).addClass(this.bgOverlayCss + n);}
                 this.currentIndex = n;
             } else {
                 s.removeClass(this.selectedClass);
-                if (this.panes[n]) this.panes[n].setStyle('display', 'none');
+                
+                if(this.addFade)
+                {
+	                if (this.panes[n]) this.panes[n].fade('out').setStyle('display', 'none');
+                }
+                else
+                {
+	                if (this.panes[n]) this.panes[n].setStyle('display', 'none');
+                }
+                                
                 if(this.bgOverlayTab) {$(this.bgOverlayTab).removeClass(this.bgOverlayCss + n);}
             }
         }, this);

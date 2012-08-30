@@ -20,6 +20,7 @@
                     panes: s.getElements('<?php echo $this->panesSelector; ?>'),
                     selectedClass: 'selected',
                     hoverClass: 'hover'
+                    <?php if ($this->tab_autoplay_fade): ?>, addFade: true<?php endif; ?>
                 });
             }
         });
