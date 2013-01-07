@@ -29,7 +29,9 @@
 	/*
 	 * Bootstrap
 	 */
-	window.addEvent('domready', loadTabControl_<?php echo $this->id; ?>);
+	(function($) {
+		window.addEvent('domready', loadTabControl_<?php echo $this->id; ?>);
+	})(document.id);
 /* ]]> */
 </script>
 <!-- indexer::continue -->

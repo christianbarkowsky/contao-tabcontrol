@@ -13,6 +13,8 @@
  * 
  * @copyright Author
  */
+ 
+(function($) {
 
 //create class
 TC = new Array();
@@ -311,3 +313,5 @@ TabControl.prototype = {
     }
     
 };
+
+})(document.id);
