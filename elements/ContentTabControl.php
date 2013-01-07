@@ -29,16 +29,12 @@ class ContentTabControl extends \ContentElement
 
 
     /**
-     * Contains the path to the js-plugin needed for Tabcontrols to work
-     */
-    private $strPlugin = 'plugins/tabcontrol/tabcontrol.js';
-
-
-    /**
      * Generate content element
      */
     protected function compile()
     {
+    	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/tabcontrol/assets/js/moo_tabcontrol.js';
+    
         //init vars
         $classes = deserialize($this->tabClasses); //come all ye classes ;)
         $titles = deserialize($this->tabTitles); //will only be filled when in tab-mode
@@ -48,7 +44,8 @@ class ContentTabControl extends \ContentElement
         if (!count($classes))
         {
             $classes = self::$defaultClasses;
-        } else
+        }
+        else
         {
             if (!strlen($classes[0]))
                 $classes[0] = self::$defaultClasses[0];

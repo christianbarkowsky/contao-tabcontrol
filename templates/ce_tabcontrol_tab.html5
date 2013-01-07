@@ -42,8 +42,9 @@
 
 	<div class="tabcontrol_tabs block">
 		<ul>
-			<?php foreach ($this->titles as $title) : ?>
+			<?php foreach ($this->titles as $key => $title) : ?>
 			<li class="<?php echo $this->tabs; ?>"><?php echo $title; ?></li>
+			<li class="<?php echo $this->tabs." tab_".$key" ; ?>"><?php echo $title; ?></li>
 			<?php endforeach; ?>
 		</ul>
 	</div>
