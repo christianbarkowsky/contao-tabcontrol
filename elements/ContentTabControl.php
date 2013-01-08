@@ -32,9 +32,7 @@ class ContentTabControl extends \ContentElement
      * Generate content element
      */
     protected function compile()
-    {
-    	$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/tabcontrol/assets/js/moo_tabcontrol.js';
-    
+    {    
         //init vars
         $classes = deserialize($this->tabClasses); //come all ye classes ;)
         $titles = deserialize($this->tabTitles); //will only be filled when in tab-mode
@@ -71,7 +69,7 @@ class ContentTabControl extends \ContentElement
 						}
 						else
 						{
-							$GLOBALS['TL_JAVASCRIPT'] = array($this->strPlugin);
+							$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/tabcontrol/assets/js/moo_tabcontrol.js';
 						}
 					}
 					elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT']))
@@ -86,7 +84,7 @@ class ContentTabControl extends \ContentElement
 						}
 						else
 						{
-							$GLOBALS['TL_JAVASCRIPT'][] = $this->strPlugin;
+							$GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/tabcontrol/assets/js/moo_tabcontrol.js';
 						}
 					}
 
