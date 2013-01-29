@@ -59,7 +59,7 @@ $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_fade'] = array('Fa
 
 
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs'] = array('Reiterüberschriften', 'Bitte geben Sie die Überschriften der Reiter an. HTML-Tags sind erlaubt.');
-$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'] = 'Reiterüberschriften';
+$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'] = 'Reiterüberschrift';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies'] = 'Cookie-Name';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'] = 'Cookie-Wert';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'] = 'Standard';
