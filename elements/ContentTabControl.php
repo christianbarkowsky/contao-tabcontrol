@@ -32,11 +32,13 @@ class ContentTabControl extends \ContentElement
      * Generate content element
      */
     protected function compile()
-    {    
+    {
         //init vars
         $classes = deserialize($this->tabClasses); //come all ye classes ;)
         $titles = deserialize($this->tabTitles); //will only be filled when in tab-mode
         static $panelIndex = 0; //static index counter
+        
+        $arrTabTabs = deserialize($this->tab_tabs);
 
         //default classes if neccessary
         if (!count($classes))

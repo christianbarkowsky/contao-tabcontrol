@@ -95,19 +95,19 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
 			(
 				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
 				'inputType' 		=> 'text',
-				'eval'                  => array('mandatory'=>true, 'style'=>'width:115px')
+				'eval'                  => array('mandatory'=>true, 'style'=>'width:250px')
 			),
 			'tab_tabs_cookies' => array
 			(
 				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies'],
 				'inputType' 		=> 'text',
-				'eval'                  => array('mandatory'=>true, 'style'=>'width:115px')
+				'eval'                  => array('style'=>'width:150px')
 			),
 			'tab_tabs_cookies_value' => array
 			(
 				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'],
 				'inputType' 		=> 'text',
-				'eval'                  => array('mandatory'=>true, 'style'=>'width:115px')
+				'eval'                  => array('style'=>'width:75px')
 			),
 			'tab_tabs_default' => array
 			(
