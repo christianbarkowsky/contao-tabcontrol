@@ -94,10 +94,10 @@ class ContentTabControl extends \ContentElement
                 } else
                 {
                     $titleList = '';
-
-                    foreach ($titles as $index => $title)
-                    {
-                        $titleList .=++$index . '. ' . $title . '<br/>';
+                    
+                    foreach($arrTabTabs as $index => $title)
+                    {
+                    	$titleList .=++$index . '. ' . $title['tab_tabs_name'] . '<br>';
                     }
 
                     $this->Template = new BackendTemplate('be_wildcard');
