@@ -1,37 +1,22 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
- *
- * PHP version 5
- * @copyright  Christian Barkowsky, Mirco Rahn, Jean-Bernard Valentaten 2009-2011
- * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Mirco Rahn <http://www.complus-ag.net>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
- * @package    TabControl
- * @license    GNU/LGPL
- * @filesource
+ * TabControl
+ * 
+ * @copyright  Christian Barkowsky 2012-2013, Jean-Bernard Valentaten 2009-2012
+ * @package    tabControl
+ * @author     Christian Barkowsky <http://www.christianbarkowsky.de>
+ * @license    LGPL
  */
+ 
 
 // Palettes
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol'] = '{type_legend},type,tabType';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},type,headline,tabType;{tab_legend},tabTitles,tabBehaviour,tabClasses;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},type,headline,tabType;{tab_legend},tabTitles,tab_tabs,tabBehaviour,tabClasses;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstart'] = '{type_legend},type,tabType;{tab_legend},tabClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstop'] = '{type_legend},type,tabType;{protected_legend:hide},protected;{expert_legend:hide},guests';
+
 
 // Fields
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabType'] = array
@@ -95,6 +80,46 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_delay'] = array
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'],
 	'inputType' => 'text',
 	'eval' => array('mandatory' => true, 'nospace' => true, 'rgxp' => 'digit', 'tl_class' => 'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
+(
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs'],
+	'exclude' => true,
+	'inputType' => 'multiColumnWizard',
+	'eval' => array
+	(
+		'columnFields' => array
+		(
+			'tab_tabs_name' => array
+			(
+				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
+				'inputType' 		=> 'text',
+				'eval'                  => array('mandatory'=>true, 'style'=>'width:115px')
+			),
+			'tab_tabs_cookies' => array
+			(
+				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies'],
+				'inputType' 		=> 'text',
+				'eval'                  => array('mandatory'=>true, 'style'=>'width:115px')
+			),
+			'tab_tabs_cookies_value' => array
+			(
+				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'],
+				'inputType' 		=> 'text',
+				'eval'                  => array('mandatory'=>true, 'style'=>'width:115px')
+			),
+			'tab_tabs_default' => array
+			(
+				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'],
+				'exclude'               => true,
+				'inputType'             => 'checkbox',
+				'eval'                  => array('style'=>'width:40px')
+ 
+			)
+		)
+	),
+	'sql' => "blob NULL"
 );
 
 ?>
