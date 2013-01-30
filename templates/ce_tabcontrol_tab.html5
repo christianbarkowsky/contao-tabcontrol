@@ -21,6 +21,7 @@
                     selectedClass: 'selected',
                     hoverClass: 'hover'
                     <?php if ($this->tab_autoplay_fade): ?>, addFade: true<?php endif; ?>
+                    <?php if ($this->tab_tabs_default): ?>,defaultTab: <?php echo $this->tab_tabs_default; ?><?php endif; ?>
                 });
             }
         });

@@ -36,8 +36,6 @@ $GLOBALS['TL_LANG']['tl_content']['tabBehaviour']['0'] = "Verhaltensweise";
 $GLOBALS['TL_LANG']['tl_content']['tabBehaviour']['1'] = "Stellen Sie hier ein auf welches Ereignis die Reiter reagieren sollen.";
 $GLOBALS['TL_LANG']['tl_content']['tabClasses']['0'] = "Klassennamen";
 $GLOBALS['TL_LANG']['tl_content']['tabClasses']['1'] = "Lassen Sie das Feld leer, um die Standard-Klassennamen zu verwenden, oder geben Sie eigene Reiter- und Panelklassen ein.";
-$GLOBALS['TL_LANG']['tl_content']['tabTitles']['0'] = "Reiterüberschriften";
-$GLOBALS['TL_LANG']['tl_content']['tabTitles']['1'] = "Bitte geben Sie die Überschriften der Reiter an. HTML-Tags sind erlaubt.";
 $GLOBALS['TL_LANG']['tl_content']['tabType']['0'] = "Betriebsart";
 $GLOBALS['TL_LANG']['tl_content']['tabType']['1'] = "Bitte wählen Sie die Betriebsart des Reiterelements.";
 $GLOBALS['TL_LANG']['tl_content']['tab_legend'] = "Reitereinstellungen";
@@ -60,7 +58,7 @@ $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_fade'] = array('Fa
 
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs'] = array('Reiterüberschriften', 'Bitte geben Sie die Überschriften der Reiter an. HTML-Tags sind erlaubt.');
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'] = 'Reiterüberschrift';
-$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies'] = 'Cookie-Name';
+$GLOBALS['TL_LANG']['tl_content']['tabControlCookies'] = array('Cookie-Name', 'Bitte geben Sie den Cookie-Namen ein.');
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'] = 'Cookie-Wert';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'] = 'Standard';
 

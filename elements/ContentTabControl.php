@@ -33,11 +33,8 @@ class ContentTabControl extends \ContentElement
      */
     protected function compile()
     {
-        //init vars
-        $classes = deserialize($this->tabClasses); //come all ye classes ;)
-        $titles = deserialize($this->tabTitles); //will only be filled when in tab-mode
-        static $panelIndex = 0; //static index counter
-        
+    	static $panelIndex = 0; 
+        $classes = deserialize($this->tabClasses);      
         $arrTabTabs = deserialize($this->tab_tabs);
 
         //default classes if neccessary
@@ -95,11 +92,14 @@ class ContentTabControl extends \ContentElement
                 {
                     $titleList = '';
                     
-                    foreach($arrTabTabs as $index => $title)
-                    {
-                    	$titleList .=++$index . '. ' . $title['tab_tabs_name'] . '<br>';
-                    }
-
+                    if(!empty($arrTabTabs))
+                    {
+	                    foreach($arrTabTabs as $index => $title)
+	                    {
+	                    	$titleList .= ++$index . '. ' . $title['tab_tabs_name'] . '<br>';
+	                    }
+	                }
+                    
                     $this->Template = new BackendTemplate('be_wildcard');
                     $this->Template->wildcard = '### TabControl START: Tabs ###';
                     $this->Template->title = $titleList;
@@ -144,7 +144,6 @@ class ContentTabControl extends \ContentElement
             	break;
         }
 
-
         $this->Template->id = $this->id;
 
         $articleAlias = $this->getArticleAlias($this->pid);
@@ -155,7 +154,21 @@ class ContentTabControl extends \ContentElement
         $this->Template->panesSelector = '.' . str_replace(' ', '.', $classes[1]);
         $this->Template->tabs = $classes[0];
         $this->Template->tabsSelector = '.' . str_replace(' ', '.', $classes[0]);
-        $this->Template->titles = $titles;
+        
+		if(!empty($arrTabTabs))
+		{
+			foreach($arrTabTabs as $index => $title)
+			{
+				$arrTabTitles[] = $title['tab_tabs_name'];
+				
+				if($title['tab_tabs_default'])
+				{
+					$this->Template->tab_tabs_default = $index;
+				}
+			}
+
+			$this->Template->titles = $arrTabTitles;
+		}     
         
         $this->Template->tab_autoplay_autoSlide = $this->tab_autoplay_autoSlide;
         $this->Template->tab_autoplay_delay = $this->tab_autoplay_delay;

@@ -13,7 +13,7 @@
 // Palettes
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol'] = '{type_legend},type,tabType';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},type,headline,tabType;{tab_legend},tabTitles,tab_tabs,tabBehaviour,tabClasses;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},type,headline,tabType;{tab_legend},tabControlCookies,tab_tabs,tabBehaviour,tabClasses;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstart'] = '{type_legend},type,tabType;{tab_legend},tabClasses;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstop'] = '{type_legend},type,tabType;{protected_legend:hide},protected;{expert_legend:hide},guests';
 
@@ -28,14 +28,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabType'] = array
     'options' => array('tabcontroltab', 'tabcontrolstart', 'tabcontrolstop', 'tabcontrol_end'),
     'reference' => &$GLOBALS['TL_LANG']['tl_content']['tabControl'],
     'eval' => array('helpwizard' => true, 'submitOnChange' => true)
-);
-
-$GLOBALS['TL_DCA']['tl_content']['fields']['tabTitles'] = array
-(
-    'label' => &$GLOBALS['TL_LANG']['tl_content']['tabTitles'],
-    'exclude' => true,
-    'inputType' => 'listWizard',
-    'eval' => array('mandatory' => true, 'maxlength' => 255, 'allowHtml' => true)
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabClasses'] = array
@@ -82,6 +74,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_delay'] = array
 	'eval' => array('mandatory' => true, 'nospace' => true, 'rgxp' => 'digit', 'tl_class' => 'w50')
 );
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['tabControlCookies'] = array
+(
+	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControlCookies'],
+	'inputType' => 'text',
+	'eval' => array('maxlength'=>64),
+	'sql' => "varchar(64) NOT NULL default ''"
+);
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
 (
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs'],
@@ -95,13 +95,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
 			(
 				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
 				'inputType' 		=> 'text',
-				'eval'                  => array('mandatory'=>true, 'style'=>'width:250px')
-			),
-			'tab_tabs_cookies' => array
-			(
-				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies'],
-				'inputType' 		=> 'text',
-				'eval'                  => array('style'=>'width:150px')
+				'eval'                  => array('mandatory'=>true, 'style'=>'width:400px')
 			),
 			'tab_tabs_cookies_value' => array
 			(

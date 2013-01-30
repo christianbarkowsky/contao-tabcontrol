@@ -58,7 +58,8 @@ TabControl.prototype = {
             delay: 5000,
             bgOverlayTab: '',
             bgOverlayCss: '',
-            addFade: false
+            addFade: false,
+            defaultTab: ''
         }, options);
         this.panes = new Array();
         this.tabs = new Array();
@@ -72,6 +73,7 @@ TabControl.prototype = {
         this.bgOverlayTab = this.options.bgOverlayTab;
         this.bgOverlayCss = this.options.bgOverlayCss;
         this.addFade = this.options.addFade;
+        this.defaultTab = this.options.defaultTab;
         
         //init tabs and panes
         this._initTabs();
@@ -85,7 +87,7 @@ TabControl.prototype = {
         if (!this.initialTab) {
             //init local vars
             var anchoredPane = $(location.hash.substr(1));
-            var initialIndex = 0;
+            var initialIndex = (this.defaultTab) ? this.defaultTab : 0;
             
             //check whether URIs anchor can be found in our panes
             if (anchoredPane) this.panes.each(function(pane, index) {
