@@ -92,13 +92,11 @@ class ContentTabControl extends \ContentElement
                 {
                     $titleList = '';
                     
-                    if(!empty($arrTabTabs))
+                    $counter = 1;
+                    foreach($arrTabTabs as $index)
                     {
-	                    foreach($arrTabTabs as $index => $title)
-	                    {
-	                    	$titleList .= ++$index . '. ' . $title['tab_tabs_name'] . '<br>';
-	                    }
-	                }
+                    	$titleList .= $counter++ . '. ' . $index['tab_tabs_name'] . '<br>';
+                    }
                     
                     $this->Template = new BackendTemplate('be_wildcard');
                     $this->Template->wildcard = '### TabControl START: Tabs ###';
@@ -157,16 +155,28 @@ class ContentTabControl extends \ContentElement
         
 		if(!empty($arrTabTabs))
 		{
+			$defaultByCookie = '';
+			$default = 0;
+		
 			foreach($arrTabTabs as $index => $title)
 			{
 				$arrTabTitles[] = $title['tab_tabs_name'];
 				
 				if($title['tab_tabs_default'])
 				{
-					$this->Template->tab_tabs_default = $index;
+					$default = $index;
 				}
-			}
-
+				
+				if($this->tabControlCookies)
+				{
+					if($this->check($title, $this->tabControlCookies))
+					{
+						$defaultByCookie = $index;
+					}
+				}
+			}			
+						
+			$this->Template->tab_tabs_default = $defaultByCookie ? $defaultByCookie : $default;
 			$this->Template->titles = $arrTabTitles;
 		}     
         
@@ -189,6 +199,25 @@ class ContentTabControl extends \ContentElement
         }
 
         return null;
+    }
+    
+    
+    /**
+     * Set default tab by cookie
+     */
+    protected function check($title, $cookieName)
+    {
+    	$cookieValue = Input::cookie($cookieName);
+    
+    	if($cookieValue)
+    	{
+	    	if($title['tab_tabs_cookies_value'] == $cookieValue)
+	    	{
+		    	return true;
+	    	}
+    	}
+    	
+    	return false;
     }
 }
 
