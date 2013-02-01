@@ -176,7 +176,7 @@ class ContentTabControl extends \ContentElement
 				}
 			}			
 						
-			$this->Template->tab_tabs_default = $defaultByCookie ? $defaultByCookie : $default;
+			$this->Template->tab_tabs_default = (isset($defaultByCookie)) ? $defaultByCookie : $default;
 			$this->Template->titles = $arrTabTitles;
 		}     
         
