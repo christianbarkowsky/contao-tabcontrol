@@ -177,9 +177,17 @@ class ContentTabControl extends \ContentElement
 						$defaultByCookie = $index;
 					}
 				}
-			}			
-						
-			$this->Template->tab_tabs_default = (isset($defaultByCookie)) ? $defaultByCookie : $default;
+			}
+			
+			if($defaultByCookie != '')
+			{
+				$this->Template->tab_tabs_default = $defaultByCookie;
+			}
+			else
+			{
+				$this->Template->tab_tabs_default = $default;
+			}
+			
 			$this->Template->titles = $arrTabTitles;
 		}     
         
