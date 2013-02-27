@@ -96,7 +96,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
 			(
 				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
 				'inputType' 		=> 'text',
-				'eval'                  => array('mandatory'=>true, 'style'=>'width:400px')
+				'eval'                  => array('mandatory'=>true, 'style'=>'width:400px', 'allowHtml'=>true)
 			),
 			'tab_tabs_cookies_value' => array
 			(
