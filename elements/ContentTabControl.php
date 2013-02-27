@@ -138,6 +138,7 @@ class ContentTabControl extends \ContentElement
             	if (TL_MODE == 'FE')
                 {
                 	$this->Template = new FrontendTemplate($this->tab_template_end);
+                	$panelIndex = 0;
 	            } else {
 		           	$this->Template = new BackendTemplate('be_wildcard');
                     $this->Template->wildcard = '### TabControl END ###';
