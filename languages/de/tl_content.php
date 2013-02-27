@@ -54,6 +54,14 @@ $GLOBALS['TL_LANG']['tl_content']['tabControl']['tabcontrol_end']['1'] = "Markie
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_autoSlide'] = array('Autoplay aktiv', 'Autoplay aktivieren.');
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'] = array('Einblendungsdauer', 'Angabe in Millisekunden.');
 $GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_fade'] = array('Fade aktivieren', 'Elemente werden ein- und ausgeblendet.');
+$GLOBALS['TL_LANG']['tl_content']['tab_template']['0'] = "TabControl Template";
+$GLOBALS['TL_LANG']['tl_content']['tab_template']['1'] = "Hier können Sie das Template auswählen.";
+$GLOBALS['TL_LANG']['tl_content']['tab_template_start']['0'] = "TabControl Template";
+$GLOBALS['TL_LANG']['tl_content']['tab_template_start']['1'] = "Hier können Sie das Template auswählen.";
+$GLOBALS['TL_LANG']['tl_content']['tab_template_stop']['0'] = "TabControl Template";
+$GLOBALS['TL_LANG']['tl_content']['tab_template_stop']['1'] = "Hier können Sie das Template auswählen.";
+$GLOBALS['TL_LANG']['tl_content']['tab_template_end']['0'] = "TabControl Template";
+$GLOBALS['TL_LANG']['tl_content']['tab_template_end']['1'] = "Hier können Sie das Template auswählen.";
 
 
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs'] = array('Reiterüberschriften', 'Bitte geben Sie die Überschriften der Reiter an. HTML-Tags sind erlaubt.');
