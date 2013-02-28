@@ -102,7 +102,7 @@ class ContentTabControl extends \ContentElement
                     }
                     
                     $this->Template = new BackendTemplate('be_wildcard');
-                    $this->Template->wildcard = '### TabControl START: Tabs ###';
+                    $this->Template->wildcard = '### TABCONTROL: TABGROUP START ###';
                     $this->Template->title = $titleList;
                 }
                 break;
@@ -116,7 +116,7 @@ class ContentTabControl extends \ContentElement
                 } else
                 {
                     $this->Template = new BackendTemplate('be_wildcard');
-                    $this->Template->wildcard = '### TabControl: ' . (++$panelIndex) . '. Pane START ###';
+                    $this->Template->wildcard = '### TABCONTROL: ' . (++$panelIndex) . '. SECTION START ###';
                 }
                 break;
 
@@ -128,7 +128,7 @@ class ContentTabControl extends \ContentElement
                 } else
                 {
                     $this->Template = new BackendTemplate('be_wildcard');
-                    $this->Template->wildcard = '### TabControl: ' . $panelIndex . '. Pane END ###';
+                    $this->Template->wildcard = '### TABCONTROL: ' . $panelIndex . '. SECTION END ###';
                 }
                 break;
                 
@@ -140,7 +140,7 @@ class ContentTabControl extends \ContentElement
                 	$this->Template = new FrontendTemplate($this->tab_template_end);
 	            } else {
 		           	$this->Template = new BackendTemplate('be_wildcard');
-                    $this->Template->wildcard = '### TabControl END ###';
+                    $this->Template->wildcard = '### TABCONTROL: TABGROUP END ###';
                     $panelIndex = 0;
 	            }
             	break;
