@@ -9,6 +9,8 @@
  * @license    LGPL
  */
  
+//define('TL_MODE', 'FE');
+//require 'system/initialize.php';
 
 /**
  * Run in a custom namespace, so the class can be replaced
@@ -38,18 +40,48 @@ class TabControlRunonce extends \Controller
 	
 		if($objInstalledTabControl->version <= '30000009')
 		{
-			$this->Database->query("ALTER TABLE tl_content ADD tab_template varchar(64) NOT NULL default 'ce_tabcontrol_tab'");
-			$this->Database->query("ALTER TABLE tl_content ADD tab_template_start varchar(64) NOT NULL default 'ce_tabcontrol_start'");
-			$this->Database->query("ALTER TABLE tl_content ADD tab_template_stop varchar(64) NOT NULL default 'ce_tabcontrol_stop'");
-			$this->Database->query("ALTER TABLE tl_content ADD tab_template_end varchar(64) NOT NULL default 'ce_tabcontrol_end	'");
+			if (!$this->Database->fieldExists('tab_tabs', 'tl_content'))
+			{
+				$this->Database->query("ALTER TABLE tl_content ADD tab_tabs blob NULL");
+			}			
+		
+			if (!$this->Database->fieldExists('tab_template', 'tl_content'))
+			{
+				$this->Database->query("ALTER TABLE tl_content ADD tab_template varchar(64) NOT NULL default 'ce_tabcontrol_tab'");
+			}
+			
+			if (!$this->Database->fieldExists('tab_template_start', 'tl_content'))
+			{
+				$this->Database->query("ALTER TABLE tl_content ADD tab_template_start varchar(64) NOT NULL default 'ce_tabcontrol_start'");
+			}
+			
+			if (!$this->Database->fieldExists('tab_template_stop', 'tl_content'))
+			{
+				$this->Database->query("ALTER TABLE tl_content ADD tab_template_stop varchar(64) NOT NULL default 'ce_tabcontrol_stop'");
+			}
+			
+			if (!$this->Database->fieldExists('tab_template_end', 'tl_content'))
+			{
+				$this->Database->query("ALTER TABLE tl_content ADD tab_template_end varchar(64) NOT NULL default 'ce_tabcontrol_end	'");
+			}
 
-			/*
 			$objTabControl = $this->Database->query("SELECT * FROM tl_content WHERE type='tabcontrol' AND tabType='tabcontroltab'");
 			
 			while ($objTabControl->next())
 			{
+				if ($this->Database->fieldExists('tabTitles', 'tl_content'))
+				{
+					$arrTabs = array();
+					$arrTabTitles = deserialize($objTabControl->tabTitles);
+					
+					foreach($arrTabTitles as $title)
+					{
+						$arrTabs[] = array('tab_tabs_name' => $title, 'tab_tabs_cookies_value' => '', 'tab_tabs_default' => '');
+					}
+					
+					$this->Database->query("UPDATE tl_content SET tab_tabs='". serialize($arrTabs) ."' WHERE id=". $objTabControl->id ."");
+				}				
 			}
-			*/
 		}
 	}
 }
