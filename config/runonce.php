@@ -34,30 +34,18 @@ class TabControlRunonce extends \Controller
 	 */
 	public function run()
 	{
-		$objTabControl = $this->Database->query("SELECT * FROM tl_content WHERE type='tabcontrol'");
-
-		while($objTabControl->next())
+		$objInstalledTabControl = $this->Database->query("SELECT version FROM tl_repository_installs WHERE extension='tabcontrol' LIMIT 1");
+	
+		if($objInstalledTabControl->version <= '30000009')
 		{
-		
-			if($objTabControl->tabType == 'tabcontroltab')
-			{
-				//$this->Database->prepare("UPDATE tl_content SET tab_template=? WHERE id=?")->execute('ce_tabcontrol_tab', $objStores->id);
-			}
-			
-			if($objTabControl->tabType == 'tabcontrolstart')
-			{
-				//$this->Database->prepare("UPDATE tl_content SET tab_template_start=? WHERE id=?")->execute('ce_tabcontrol_start', $objStores->id);
-			}
-			
-			if($objTabControl->tabType == 'tabcontrolstop')
-			{
-				//$this->Database->prepare("UPDATE tl_content SET tab_template_stop=? WHERE id=?")->execute('ce_tabcontrol_stop', $objStores->id);
-			}
-			
-			if($objTabControl->tabType == 'tabcontrol_end')
-			{
-				//$this->Database->prepare("UPDATE tl_content SET tab_template_end=? WHERE id=?")->execute('ce_tabcontrol_end', $objStores->id);
-			}		
+			$this->Database->query("ALTER TABLE tl_content ADD tab_template varchar(64) NOT NULL default 'ce_tabcontrol_tab'");
+			$this->Database->query("ALTER TABLE tl_content ADD tab_template_start varchar(64) NOT NULL default 'ce_tabcontrol_start'");
+			$this->Database->query("ALTER TABLE tl_content ADD tab_template_stop varchar(64) NOT NULL default 'ce_tabcontrol_stop'");
+			$this->Database->query("ALTER TABLE tl_content ADD tab_template_end varchar(64) NOT NULL default 'ce_tabcontrol_end	'");
+
+			/*
+			$objTabControl = $this->Database->query("SELECT * FROM tl_content WHERE type='tabcontrol' AND tabType='tabcontroltab'");
+			*/
 		}
 	}
 }
