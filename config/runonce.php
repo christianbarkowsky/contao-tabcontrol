@@ -45,6 +45,10 @@ class TabControlRunonce extends \Controller
 
 			/*
 			$objTabControl = $this->Database->query("SELECT * FROM tl_content WHERE type='tabcontrol' AND tabType='tabcontroltab'");
+			
+			while ($objTabControl->next())
+			{
+			}
 			*/
 		}
 	}
