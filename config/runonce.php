@@ -62,7 +62,7 @@ class TabControlRunonce extends \Controller
 			
 			if (!$this->Database->fieldExists('tab_template_end', 'tl_content'))
 			{
-				$this->Database->query("ALTER TABLE tl_content ADD tab_template_end varchar(64) NOT NULL default 'ce_tabcontrol_end	'");
+				$this->Database->query("ALTER TABLE tl_content ADD tab_template_end varchar(64) NOT NULL default 'ce_tabcontrol_end'");
 			}
 
 			$objTabControl = $this->Database->query("SELECT * FROM tl_content WHERE type='tabcontrol' AND tabType='tabcontroltab'");
