@@ -3,7 +3,7 @@
 /* <![CDATA[ */
 	function loadTabControl_<?php echo $this->id; ?>() {
 	
-		var tablist = [<?php foreach ($this->titles as $key => $title) : ?>'<?php echo standardize($key); ?>',<?php endforeach; ?>];
+		var tablist = [<?php foreach ($this->titles as $key => $title) : ?>'<?php echo standardize($title); ?>',<?php endforeach; ?>];
 	
 		window.TC_<?php echo $this->id; ?> = new Array();
 		i = 0;
@@ -23,8 +23,9 @@
 					}
 				}
 			}
-	
-			if(inittab != '') { defaultInitTab = inittab; } else { defaultInitTab = <?php echo $this->tab_tabs_default; ?>; }
+			
+			var defaultInitTab = <?php echo $this->tab_tabs_default; ?>;	
+			if(inittab != '') { defaultInitTab = inittab; }
 	
 			if(elements.length)
 			{
@@ -38,7 +39,7 @@
 					selectedClass: 'selected',
 					hoverClass: 'hover'
 					<?php if ($this->tab_autoplay_fade): ?>, addFade: true<?php endif; ?>
-					<?php if ($this->tab_tabs_default): ?>,defaultTab: defaultInitTab<?php endif; ?>
+					,defaultTab: defaultInitTab
 				});
 			}
 		});
