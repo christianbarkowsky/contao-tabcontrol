@@ -1,35 +1,52 @@
 <!-- indexer::stop -->
 <script type="text/javascript">
 /* <![CDATA[ */
-    function loadTabControl_<?php echo $this->id; ?>() {
-        window.TC_<?php echo $this->id; ?> = new Array();
-        i = 0;
-        $$('#tabcontrol_<?php echo $this->id; ?>').each(function(s) {
-            i++;
-            elements = s.getElements('<?php echo $this->tabsSelector; ?>');
-            if(elements.length){
-                window.TC_<?php echo $this->id; ?>[i] = new TabControl(s, {
-<?php if ($this->tab_autoplay_autoSlide): ?>
-                    autoSlide: true,
-<?php endif; ?>
-<?php if ($this->tab_autoplay_delay): ?>
-                    delay: <?php echo $this->tab_autoplay_delay; ?>,
-<?php endif; ?>
-                    behaviour: '<?php echo $this->behaviour; ?>',
-                    tabs: s.getElements('<?php echo $this->tabsSelector; ?>'),
-                    panes: s.getElements('<?php echo $this->panesSelector; ?>'),
-                    selectedClass: 'selected',
-                    hoverClass: 'hover'
-                    <?php if ($this->tab_autoplay_fade): ?>, addFade: true<?php endif; ?>
-                    <?php if ($this->tab_tabs_default): ?>,defaultTab: <?php echo $this->tab_tabs_default; ?><?php endif; ?>
-                });
-            }
-        });
-    }
-
+	function loadTabControl_<?php echo $this->id; ?>() {
+	
+		var tablist = [<?php foreach ($this->titles as $key => $title) : ?>'<?php echo standardize($key); ?>',<?php endforeach; ?>];
+	
+		window.TC_<?php echo $this->id; ?> = new Array();
+		i = 0;
+		$$('#tabcontrol_<?php echo $this->id; ?>').each(function(s)
+		{
+			i++;
+			elements = s.getElements('<?php echo $this->tabsSelector; ?>');
+	
+			var inittab = '';
+			if (window.location.hash != '')
+			{
+				for (var i=0; i<tablist.length; i++)
+				{
+					if (window.location.hash == '#'+tablist[i])
+					{
+						inittab = i;
+					}
+				}
+			}
+	
+			if(inittab != '') { defaultInitTab = inittab; } else { defaultInitTab = <?php echo $this->tab_tabs_default; ?>; }
+	
+			if(elements.length)
+			{
+				window.TC_<?php echo $this->id; ?>[i] = new TabControl(s, 
+				{
+					<?php if ($this->tab_autoplay_autoSlide): ?>autoSlide: true,<?php endif; ?>
+					<?php if ($this->tab_autoplay_delay): ?>delay: <?php echo $this->tab_autoplay_delay; ?>,<?php endif; ?>
+					behaviour: '<?php echo $this->behaviour; ?>',
+					tabs: s.getElements('<?php echo $this->tabsSelector; ?>'),
+					panes: s.getElements('<?php echo $this->panesSelector; ?>'),
+					selectedClass: 'selected',
+					hoverClass: 'hover'
+					<?php if ($this->tab_autoplay_fade): ?>, addFade: true<?php endif; ?>
+					<?php if ($this->tab_tabs_default): ?>,defaultTab: defaultInitTab<?php endif; ?>
+				});
+			}
+		});
+	}
+	
 	/*
-	 * Bootstrap
-	 */
+	* Bootstrap
+	*/
 	(function($) {
 		window.addEvent('domready', loadTabControl_<?php echo $this->id; ?>);
 	})(document.id);
@@ -46,7 +63,7 @@
 	<div class="tabcontrol_tabs block">
 		<ul>
 			<?php foreach ($this->titles as $key => $title) : ?>
-			<li class="<?php echo $this->tabs . ' tab_' . $key; ?>"><?php echo $title; ?></li>
+			<li id="<?php echo standardize($title); ?>" class="<?php echo $this->tabs . ' tab_' . $key; ?>"><?php echo $title; ?></li>
 			<?php endforeach; ?>
 		</ul>
 	</div>
