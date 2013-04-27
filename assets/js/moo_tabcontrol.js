@@ -17,8 +17,8 @@
 (function($) {
 
 //create class
-TC = new Array();
-TabControl = new Class();
+//TC = new Array();
+//TabControl = new Class();
 
 /**
  * Options:
@@ -33,34 +33,35 @@ TabControl = new Class();
  * selectedClass | String    | The css-class that will be assigned to the selected tab (defaults to empty string)
  * tabs          | Array     | The (ids of the) tabs in the correct order. If missing will use css-rule div#tab<N> within element
  */
-TabControl.prototype = {
+var TabControl = new Class({
+    Implements: Options,
     /**
      * Constructor
      *
      * @param {Element,String} element The element that will be used as container for the tab-control
      * @param {Object} [options] The options as seen above
      */
-    
+    options: {
+        behaviour: 'click',
+        hoverClass: '',
+        initialTab: '',
+        onChange: function(){},
+        selectedClass: '',
+        autoSlide: false,
+        delay: 5000,
+        bgOverlayTab: '',
+        bgOverlayCss: '',
+        addFade: false,
+        defaultTab: ''
+    },
     
     initialize: function(element, options) {
         //init vars
         //var tabcontrol = this;
         //console.log('TabControl.init');
         //init datamembers
+        this.setOptions(options);
         this.element = $(element);
-        this.options = $extend({
-            behaviour: 'click',
-            hoverClass: '',
-            initialTab: '',
-            onChange: $empty,
-            selectedClass: '',
-            autoSlide: false,
-            delay: 5000,
-            bgOverlayTab: '',
-            bgOverlayCss: '',
-            addFade: false,
-            defaultTab: ''
-        }, options);
         this.panes = new Array();
         this.tabs = new Array();
         
@@ -159,9 +160,12 @@ TabControl.prototype = {
         //tabs-datamember and setting up listeners
         tabs.each(function(s) {
             var elem = $(s);
-            
+            var self = this;
             //add an eventlistener
-            elem.addEvent(this.behaviour, this.selectTab.bindWithEvent(this, elem));
+            elem.addEvent(this.behaviour, function() {
+
+                self.selectTab(this, elem);
+            });
             
             //if we're not in 'mouseover'-mode and hoverClass is set, we add a listener for hovering
             if (this.behaviour!='mouseover') {
@@ -212,6 +216,8 @@ TabControl.prototype = {
         //init vars
         var currentPane;
         var currentTab;
+
+
         
         //make sure tab is extended
         tab = $(tab);
@@ -297,7 +303,7 @@ TabControl.prototype = {
     },
 
     pauseSlide: function(){
-        $clear(this.autoSlide);
+        clearInterval(this.autoSlide);
     },
     continueSlide: function(){
         this.autoSlide = this.skipNext.periodical(this.options.delay, this);
@@ -314,6 +320,8 @@ TabControl.prototype = {
         this.autoSlide = this.skipNext.periodical(this.options.delay, this);
     }
     
-};
+});
+
+window.TabControl = TabControl;
 
 })(document.id);
