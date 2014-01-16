@@ -1,6 +1,6 @@
 # [tabcontrol] TabControl for Contao
 
-For Contao 3.0 - 3.1
+For Contao 3.0 - 3.2
 
 Please visit the project website at http://www.christianbarkowsky.de/contao-tabcontrol.html.
 
