@@ -3,9 +3,9 @@
 /**
  * TabControl
  * 
- * @copyright  Christian Barkowsky 2012-2013, Jean-Bernard Valentaten 2009-2012
+ * @copyright  Christian Barkowsky 2012-2014, Jean-Bernard Valentaten 2009-2012
  * @package    tabControl
- * @author     Christian Barkowsky <http://www.christianbarkowsky.de>
+ * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
  */
 
@@ -13,7 +13,7 @@
 // Palettes
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol'] = '{type_legend},type,tabType';
-$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},type,headline,tabType;{tab_legend},tabControlCookies,tab_tabs,tabBehaviour,tabClasses;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{template_legend:hide},tab_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},type,headline,tabType;{tab_legend},tabControlCookies,tab_tabs,tabBehaviour,tabClasses,tab_remember;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{template_legend:hide},tab_template;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstart'] = '{type_legend},type,tabType;{tab_legend},tabClasses;{template_legend:hide},tab_template_start;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstop'] = '{type_legend},type,tabType;{template_legend:hide},tab_template_stop;{protected_legend:hide},protected;{expert_legend:hide},guests';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol_end'] = '{type_legend},type,tabType;{template_legend:hide},tab_template_end;{protected_legend:hide},protected;{expert_legend:hide},guests';
@@ -161,6 +161,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template_end'] = array
 	'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['tab_remember'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_remember'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'clr'),
+	'sql'                     => "char(1) NOT NULL default ''"
+);
+
 
 
 class tl_content_tabcontrol extends Backend
@@ -231,5 +240,3 @@ class tl_content_tabcontrol extends Backend
 		return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, $objLayout->pid);
 	}
 }
-
-?>

@@ -1,29 +1,12 @@
-<?php if (!defined('TL_ROOT')) die('You can not access this file directly!');
+<?php
 
 /**
- * TYPOlight webCMS
- * Copyright (C) 2005 Leo Feyer
- *
- * This program is free software: you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation, either
- * version 2.1 of the License, or (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this program. If not, please visit the Free
- * Software Foundation website at http://www.gnu.org/licenses/.
- *
- * PHP version 5
- * @copyright  Christian Barkowsky, Jean-Bernard Valentaten 2009-2011
- * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
- * @package    TabControl
- * @license    GNU/LGPL
- * @filesource
+ * TabControl
+ * 
+ * @copyright  Christian Barkowsky 2011-2014, Jean-Bernard Valentaten 2009-2011
+ * @package    tabControl
+ * @author     Christian Barkowsky <http://christianbarkowsky.de>
+ * @license    LGPL
  */
 
 
@@ -62,19 +45,16 @@ $GLOBALS['TL_LANG']['tl_content']['tab_template_stop']['0'] = "TabControl Templa
 $GLOBALS['TL_LANG']['tl_content']['tab_template_stop']['1'] = "Hier können Sie das Template auswählen.";
 $GLOBALS['TL_LANG']['tl_content']['tab_template_end']['0'] = "TabControl Template";
 $GLOBALS['TL_LANG']['tl_content']['tab_template_end']['1'] = "Hier können Sie das Template auswählen.";
-
-
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs'] = array('Reiterüberschriften', 'Bitte geben Sie die Überschriften der Reiter an. HTML-Tags sind erlaubt.');
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'] = 'Reiterüberschrift';
 $GLOBALS['TL_LANG']['tl_content']['tabControlCookies'] = array('Cookie-Name', 'Bitte geben Sie den Cookie-Namen ein.');
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'] = 'Cookie-Wert';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'] = 'Standard';
-
+$GLOBALS['TL_LANG']['tl_content']['tab_remember'][0] = 'Aktiven Reiter merken';
+$GLOBALS['TL_LANG']['tl_content']['tab_remember'][1] = 'Der aktive Reiter wird als Cookie gespeichert.';
 
 
 /**
  * Legends
  */
 $GLOBALS['TL_LANG']['tl_content']['tabcontrol_autoplay_legend'] = 'Autoplay';
-
-?>
