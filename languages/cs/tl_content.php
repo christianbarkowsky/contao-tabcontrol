@@ -2,12 +2,12 @@
 /**
  * TL_ROOT/system/modules/tabcontrol/languages/cs/tl_content.php 
  * 
- * Contao extension: tabcontrol 1.1.4 stable 
+ * Contao extension: tabcontrol 3.0.1 
  * Czech translation file 
  * 
- * Copyright : &copy; 2009-2011 by Jean-Bernard Valentaten 
+ * Copyright : © 2011-2014 Christian Barkowsky 
  * License   : GNU Lesser Public License (LGPL) 
- * Author    : Jean-Bernard Valentaten (Brains) 
+ * Author    : Christian Barkowsky Webentwicklung (christian.barkowsky), http://christianbarkowsky.de 
  * Translator: Tomas Petrlik (frogzone), www.frogzone.cz 
  * 
  * This file was created automatically be the Contao extension repository translation module.
