@@ -52,7 +52,10 @@ var TabControl = new Class({
         bgOverlayTab: '',
         bgOverlayCss: '',
         addFade: false,
-        defaultTab: ''
+        defaultTab: '',
+        tab_remember: false,
+        tab_cookiename: '',
+        tab_control:''
     },
     
     initialize: function(element, options) {
@@ -75,7 +78,10 @@ var TabControl = new Class({
         this.bgOverlayCss = this.options.bgOverlayCss;
         this.addFade = this.options.addFade;
         this.defaultTab = this.options.defaultTab;
-        
+        this.tab_remember = Boolean(this.options.tab_remember);
+        this.tab_cookiename = this.options.tab_cookiename;
+        this.tab_control = this.options.tab_control;
+
         //init tabs and panes
         this._initTabs();
         this._initPanes();
@@ -98,7 +104,15 @@ var TabControl = new Class({
             //and apply what we have computed
             this.initialTab = this.tabs[initialIndex];
         }
-        this.selectTab(null, this.initialTab);
+
+        // choose between remember last active tab and init default tab
+        if(this.tab_remember && this.checkCookie()){
+            this.reselectActiveTabByCookie();
+        }else{
+            this.selectTab(null, this.initialTab);
+        }
+
+
         if(this.options.autoSlide){
             this.addControl();
         }
@@ -124,18 +138,53 @@ var TabControl = new Class({
         
         //if we don't have panes, we try to grab 'em
         if (!panes.length) {
+            var paneParent = null;
             this.element.getElements('div').each(function(el) {
                 if (el.id && el.id.search(/^pane(\d+)$/)==0) {
+
+                    // get parent element of one pane
+                    paneParent = el.getParent().getParent();
                     panes.push(el);
                 }
             });
+
         }
         
         //iterate through panes adding them to our 
         //panes-datamember
         panes.each(function(s) {
+            // get parent element of one pane
+            paneParent = s.getParent().getParent();
             this.panes.push($(s));
         }, this);
+
+
+        // add listener to stop animation on hove
+        if(paneParent){
+            this._initPaneListeners(paneParent);
+        }
+    },
+
+
+
+    /**
+     * add listener to stop animation on hove
+     *
+     * @param el element to listen on hover
+     * @private
+     */
+    _initPaneListeners: function(el){
+        var _self = this;
+
+        // stop animation
+        el.addEvent("mouseover", function() {
+            _self.pauseSlide();
+        });
+
+        // resume animation
+        el.addEvent("mouseout", function() {
+            _self.continueSlide();
+        });
     },
     
     /**
@@ -255,9 +304,47 @@ var TabControl = new Class({
                 if(this.bgOverlayTab) {$(this.bgOverlayTab).removeClass(this.bgOverlayCss + n);}
             }
         }, this);
+
+        // set cookie to remember active tab if appropriate option enabled
+        if(this.tab_remember){
+            if(currentTab){
+                var currentTabId = currentTab.get('id');
+                this.setTabCookie({current_tab: currentTabId});
+            }
+        }
         
         //finally, we call the onChange-callback
         this.onChange(currentPane, currentTab);
+    },
+
+    /**
+     * set cookie to remember active tab
+     * @param mValue
+     */
+    setTabCookie: function(mValue){
+        var sTabCookie = Cookie.write("tcActiveTab_" + this.tab_cookiename, JSON.encode(mValue), {duration: 14});
+    },
+
+    /**
+     * check if cookie exists
+     * @returns {boolean}
+     */
+    checkCookie: function(){
+        return (Cookie.read("tcActiveTab_" + this.tab_cookiename) != null);
+    },
+
+
+    /**
+     * reselect tab by cookie if present
+     */
+    reselectActiveTabByCookie: function(){
+
+        var tabCookie = Cookie.read("tcActiveTab_" + this.tab_cookiename);
+        if(tabCookie != null){
+            var tab = JSON.decode(tabCookie)
+            var currentTab = document.id(tab.current_tab);
+            this.selectTab(null, currentTab);
+        }
     },
     
     /**
