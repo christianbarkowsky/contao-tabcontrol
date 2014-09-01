@@ -79,8 +79,12 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabControlCookies'] = array
 (
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControlCookies'],
 	'inputType' => 'text',
-	'eval' => array('maxlength'=>64),
-	'sql' => "varchar(64) NOT NULL default ''"
+	'eval' => array('maxlength'=>128),
+	'save_callback' => array
+	(
+		array('tl_content_tabcontrol', 'generateCookiesName')
+	),
+	'sql' => "varchar(128) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
@@ -238,5 +242,37 @@ class tl_content_tabcontrol extends Backend
 
 		// Return all gallery templates
 		return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, $objLayout->pid);
+	}
+	
+	
+	/**
+	 * Auto-generate the cookie name
+	 */
+	public function generateCookiesName($varValue, DataContainer $dc)
+	{
+		$autoAlias = false;
+
+		// Generate alias if there is none
+		if ($varValue == '')
+		{
+			$autoAlias = true;
+			$varValue = standardize(String::restoreBasicEntities('tabControllCookie-' . $dc->activeRecord->id));
+		}
+
+		$objAlias = $this->Database->prepare("SELECT id FROM tl_content WHERE tabControlCookies=?")->execute($varValue);
+
+		// Check whether the cookies name alias exists
+		if ($objAlias->numRows > 1 && !$autoAlias)
+		{
+			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+		}
+
+		// Add ID to cookies name
+		if ($objAlias->numRows && $autoAlias)
+		{
+			$varValue .= '-' . $dc->id;
+		}
+
+		return $varValue;
 	}
 }
