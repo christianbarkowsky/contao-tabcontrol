@@ -1,6 +1,6 @@
 /**
  * TabControl creates tabs for defined contents.
- * 
+ *
  * As of v1.2 of TabControl, initial tab can be specified via URIs anchor,
  * thus improving barrierfreeness. Note that specifying an initialTab-parameter
  * always overrides this behaviour!
@@ -9,11 +9,11 @@
  * @version 1.2
  * @license MIT-style license
  * @author Jean-Bernard Valentaten - <troggy [dot] brains [at] gmx [dot] de>
- * @author Mirco Rahn - <m [dot] rahn [at] complus-ag [dot] de> 
- * 
+ * @author Mirco Rahn - <m [dot] rahn [at] complus-ag [dot] de>
+ *
  * @copyright Author
  */
- 
+
 (function($) {
 
 //create class
@@ -57,7 +57,7 @@ var TabControl = new Class({
         tab_cookiename: '',
         tab_control:''
     },
-    
+
     initialize: function(element, options) {
         //init vars
         //var tabcontrol = this;
@@ -67,7 +67,7 @@ var TabControl = new Class({
         this.element = $(element);
         this.panes = new Array();
         this.tabs = new Array();
-        
+
         //grab optional datamembers
         this.behaviour = this.options.behaviour;
         this.hoverClass = this.options.hoverClass;
@@ -85,7 +85,7 @@ var TabControl = new Class({
         //init tabs and panes
         this._initTabs();
         this._initPanes();
-        
+
         // for Autoplay
         this.maxIndex = 0;
         this.currentIndex= 0;
@@ -95,12 +95,12 @@ var TabControl = new Class({
             //init local vars
             var anchoredPane = $(location.hash.substr(1));
             var initialIndex = (this.defaultTab) ? this.defaultTab : 0;
-            
+
             //check whether URIs anchor can be found in our panes
             if (anchoredPane) this.panes.each(function(pane, index) {
                 if (anchoredPane === pane) initialIndex = index;
-            }); 
-            
+            });
+
             //and apply what we have computed
             this.initialTab = this.tabs[initialIndex];
         }
@@ -116,26 +116,27 @@ var TabControl = new Class({
         if(this.options.autoSlide){
             this.addControl();
         }
+
     },
-    
+
     /**
      * Destructor
      */
     dispose: function() {},
-    
+
     /*
      * Private methods
      */
-    
+
     /**
      * Grabs the panes
-     * 
+     *
      * @private
      */
     _initPanes: function() {
         //init vars
         var panes = this.options.panes || new Array();
-        
+
         //if we don't have panes, we try to grab 'em
         if (!panes.length) {
             var paneParent = null;
@@ -149,8 +150,8 @@ var TabControl = new Class({
             });
 
         }
-        
-        //iterate through panes adding them to our 
+
+        //iterate through panes adding them to our
         //panes-datamember
         panes.each(function(s) {
             // get parent element of one pane
@@ -161,7 +162,7 @@ var TabControl = new Class({
 
         // add listener to stop animation on hove
         if(paneParent){
-            this._initPaneListeners(paneParent);
+            this._initHoverListeners(this,paneParent);
         }
     },
 
@@ -173,29 +174,32 @@ var TabControl = new Class({
      * @param el element to listen on hover
      * @private
      */
-    _initPaneListeners: function(el){
-        var _self = this;
+    _initHoverListeners: function(control, el){
 
-        // stop animation
-        el.addEvent("mouseover", function() {
-            _self.pauseSlide();
-        });
+        if(this.options.autoSlide){
+            // stop animation
+            el.addEvent("mouseover", function() {
+                control.pauseSlide();
+            });
 
-        // resume animation
-        el.addEvent("mouseout", function() {
-            _self.continueSlide();
-        });
+            // resume animation
+            el.addEvent("mouseleave", function() {
+                if(!control.autoSlide){
+                    control.continueSlide();
+                }
+            });
+        }
     },
-    
+
     /**
      * Grabs the tabs and installs listeners
-     * 
+     *
      * @private
      */
     _initTabs: function() {
         //init vars
         var tabs = this.options.tabs || new Array();
-        
+
         //if we don't have tabs, we try to grab 'em
         if (!tabs.length) {
             this.element.getElements('div').each(function(el) {
@@ -204,18 +208,19 @@ var TabControl = new Class({
                 }
             });
         }
-        
-        //iterate through tabs adding them to our 
+
+        //iterate through tabs adding them to our
         //tabs-datamember and setting up listeners
         tabs.each(function(s) {
             var elem = $(s);
             var self = this;
+            this._initHoverListeners(self,elem);
             //add an eventlistener
             elem.addEvent(this.behaviour, function() {
-
+                self.options.autoSlide = false;
                 self.selectTab(this, elem);
             });
-            
+
             //if we're not in 'mouseover'-mode and hoverClass is set, we add a listener for hovering
             if (this.behaviour!='mouseover') {
                 elem.addEvent('mouseover', this.highlightTab.bind(this, elem));
@@ -224,14 +229,14 @@ var TabControl = new Class({
             this.tabs.push(elem);
         }, this);
     },
-    
+
     /*
      * Public methods
      */
-    
+
     /**
      * Returns the index of the specified tab
-     * 
+     *
      * @param {String,Element} tab The tab whose index shall be returned
      * @return {int} The index of the specified tab if tab is valid, -1 otherwise
      */
@@ -239,22 +244,22 @@ var TabControl = new Class({
         //return the index of specified tab
         return this.tabs.indexOf($(tab));
     },
-    
+
     /**
      * Hightlights currently hovered tab by adding hoverClass to it
      * and removes hoverClass from all others.
-     * 
-     * @param {String,Element} tab The tab where mousecursor is curretly over 
+     *
+     * @param {String,Element} tab The tab where mousecursor is curretly over
      */
     highlightTab: function(tab) {
         //if no hoverClass is defined, we terminate
-        
+
         if (!this.hoverClass) return;
-        
+
         //if tab does not have hoverClass, we add it
         if (!tab.hasClass(this.hoverClass)) tab.addClass(this.hoverClass);
     },
-    
+
     /**
      * Will select specified tab and show its associated pane.
      *
@@ -266,16 +271,14 @@ var TabControl = new Class({
         var currentPane;
         var currentTab;
 
-
-        
         //make sure tab is extended
         tab = $(tab);
-        
+
         //iterate through tabs, showing/hiding the associated panes
         this.tabs.each(function(s, n) {
             if (s===tab) {
                 s.addClass(this.selectedClass);
-                
+
                 if(this.addFade)
                 {
 	                if (this.panes[n]) this.panes[n].setStyle('display', 'block').fade('in');
@@ -284,14 +287,15 @@ var TabControl = new Class({
                 {
 	                if (this.panes[n]) this.panes[n].setStyle('display', 'block');
                 }
-                
+
                 currentPane = this.panes[n];
                 currentTab    = s;
+                this._initHoverListeners(this,currentTab);
+
                 if(this.bgOverlayTab) {$(this.bgOverlayTab).addClass(this.bgOverlayCss + n);}
                 this.currentIndex = n;
             } else {
                 s.removeClass(this.selectedClass);
-                
                 if(this.addFade)
                 {
 	                if (this.panes[n]) this.panes[n].fade('out').setStyle('display', 'none');
@@ -300,7 +304,7 @@ var TabControl = new Class({
                 {
 	                if (this.panes[n]) this.panes[n].setStyle('display', 'none');
                 }
-                                
+
                 if(this.bgOverlayTab) {$(this.bgOverlayTab).removeClass(this.bgOverlayCss + n);}
             }
         }, this);
@@ -312,7 +316,7 @@ var TabControl = new Class({
                 this.setTabCookie({current_tab: currentTabId});
             }
         }
-        
+
         //finally, we call the onChange-callback
         this.onChange(currentPane, currentTab);
     },
@@ -346,17 +350,17 @@ var TabControl = new Class({
             this.selectTab(null, currentTab);
         }
     },
-    
+
     /**
      * Selects a tab by its index and shows its associated pane.
-     * If index is not valid and force is not set, terminates 
-     * without any change. If index is not valid and force is 
-     * set, displays either first or last tab, depending on which 
+     * If index is not valid and force is not set, terminates
+     * without any change. If index is not valid and force is
+     * set, displays either first or last tab, depending on which
      * bound is nearer to index (e.g. with index set to -1, first
      * tab ist selected)
-     * 
+     *
      * @param {int} index The index of the tab that shall be selected
-     * @param {bool} [force] Force a tab to be selected even if index is not valid (defaults to false) 
+     * @param {bool} [force] Force a tab to be selected even if index is not valid (defaults to false)
      */
     selectTabByIndex: function(index, force) {
         //do we have to force an action
@@ -367,19 +371,19 @@ var TabControl = new Class({
         } else if (index<0 || index>=this.tabs.length) {
             return;
         }
-        
+
         //select that tab and off we go
         this.selectTab(null, this.tabs[index]);
     },
-    
+
     unHighlightTab: function(tab) {
         //if no hoverClass is defined, we terminate
         if (!this.hoverClass) return;
-        
+
         //if tab does have hoverClass, we remove it
         if (tab.hasClass(this.hoverClass)) tab.removeClass(this.hoverClass);
     },
-    
+
     // new Autoplay ...
     skipNext: function(option){
         this.currentIndex += 1;
@@ -391,11 +395,15 @@ var TabControl = new Class({
 
     pauseSlide: function(){
         clearInterval(this.autoSlide);
+        this.autoSlide = null;
     },
+
     continueSlide: function(){
-        this.autoSlide = this.skipNext.periodical(this.options.delay, this);
+        if(this.options.autoSlide){
+            this.autoSlide = this.skipNext.periodical(this.options.delay, this);
+        }
     },
-    
+
     addControl: function(){
         if(this.tabs != undefined){
             this.tabs.each(function(s) {
@@ -406,7 +414,7 @@ var TabControl = new Class({
         }
         this.autoSlide = this.skipNext.periodical(this.options.delay, this);
     }
-    
+
 });
 
 window.TabControl = TabControl;
