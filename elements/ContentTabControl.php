@@ -196,6 +196,7 @@ class ContentTabControl extends \ContentElement
         $this->Template->tab_autoplay_delay = $this->tab_autoplay_delay;
         $this->Template->tab_autoplay_fade = $this->tab_autoplay_fade;
         $this->Template->tab_remember = ($this->tab_remember) ? true : false;
+        $this->Template->tabControlCookies = $this->tabControlCookies;
     }
 
 
