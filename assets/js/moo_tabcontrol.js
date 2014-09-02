@@ -114,9 +114,9 @@ var TabControl = new Class({
 
 
         if(this.options.autoSlide){
-            this.addControl();
-        }
+            this.continueSlide();
 
+        }
     },
 
     /**
@@ -183,7 +183,7 @@ var TabControl = new Class({
             });
 
             // resume animation
-            el.addEvent("mouseleave", function() {
+            el.addEvent("mouseout", function() {
                 if(!control.autoSlide){
                     control.continueSlide();
                 }
@@ -290,7 +290,6 @@ var TabControl = new Class({
 
                 currentPane = this.panes[n];
                 currentTab    = s;
-                this._initHoverListeners(this,currentTab);
 
                 if(this.bgOverlayTab) {$(this.bgOverlayTab).addClass(this.bgOverlayCss + n);}
                 this.currentIndex = n;
@@ -403,18 +402,6 @@ var TabControl = new Class({
             this.autoSlide = this.skipNext.periodical(this.options.delay, this);
         }
     },
-
-    addControl: function(){
-        if(this.tabs != undefined){
-            this.tabs.each(function(s) {
-                var elem = $(s);
-                elem.addEvent('mouseover', this.pauseSlide.bind(this, elem));
-                elem.addEvent('mouseout', this.continueSlide.bind(this, elem));
-            }, this);
-        }
-        this.autoSlide = this.skipNext.periodical(this.options.delay, this);
-    }
-
 });
 
 window.TabControl = TabControl;
