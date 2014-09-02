@@ -1,24 +1,13 @@
 /**
  * TabControl creates tabs for defined contents.
  *
- * As of v1.2 of TabControl, initial tab can be specified via URIs anchor,
- * thus improving barrierfreeness. Note that specifying an initialTab-parameter
- * always overrides this behaviour!
- *
- * @uses MooTools v1.2
- * @version 1.2
+ * @uses MooTools
  * @license MIT-style license
- * @author Jean-Bernard Valentaten - <troggy [dot] brains [at] gmx [dot] de>
- * @author Mirco Rahn - <m [dot] rahn [at] complus-ag [dot] de>
- *
- * @copyright Author
+ * @author Christian Barkowsky <http://christianbarkowsky.de>
+ * @author Jean-Bernard Valentaten - <troggy.brains@gmx.de>
  */
 
 (function($) {
-
-//create class
-//TC = new Array();
-//TabControl = new Class();
 
 /**
  * Options:
