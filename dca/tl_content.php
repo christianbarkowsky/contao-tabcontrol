@@ -71,6 +71,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_fade'] = array
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_delay'] = array
 (
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'],
+	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array('mandatory' => true, 'nospace' => true, 'rgxp' => 'digit', 'tl_class' => 'w50')
 );
@@ -78,6 +79,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_delay'] = array
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabControlCookies'] = array
 (
 	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControlCookies'],
+	'exclude' => true,
 	'inputType' => 'text',
 	'eval' => array('maxlength'=>128),
 	'save_callback' => array
@@ -173,7 +175,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_remember'] = array
 	'eval'                    => array('tl_class'=>'clr'),
 	'sql'                     => "char(1) NOT NULL default ''"
 );
-
 
 
 class tl_content_tabcontrol extends Backend
