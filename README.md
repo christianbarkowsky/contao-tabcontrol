@@ -1,11 +1,15 @@
 [![Version](http://img.shields.io/packagist/v/christianbarkowsky/tabcontrol.svg?style=flat-square)](https://packagist.org/packages/christianbarkowsky/tabcontrol)
 
-# [tabcontrol] TabControl for Contao
+# Tabs for Contao [TabControl]
 
-For Contao 3.0 - 3.4
+### More informations and examples
 
-Please visit the project website at http://christianbarkowsky.de/contao-tabcontrol.html
+* http://christianbarkowsky.de/contao-tabcontrol.html
 
-Abhängigkeiten dieser Erweiterung
+### Dependencies
+The following Contao extensions are required to run this extension:
 
-MultiColumnWizard https://contao.org/de/extension-list/view/MultiColumnWizard.html
+* MultiColumnWizard https://github.com/menatwork/MultiColumnWizard
+
+### Requirements
+* Contao 3.0.* or higher
