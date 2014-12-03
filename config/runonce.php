@@ -3,18 +3,13 @@
 /**
  * TabControl
  * 
- * @copyright  Christian Barkowsky 2013
+ * @copyright  Christian Barkowsky 2014
  * @package    tabControl
- * @author     Christian Barkowsky <http://www.christianbarkowsky.de>
+ * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
  */
  
-//define('TL_MODE', 'FE');
-//require 'system/initialize.php';
 
-/**
- * Run in a custom namespace, so the class can be replaced
- */
 namespace Contao;
 
 
@@ -90,5 +85,5 @@ class TabControlRunonce extends \Controller
 /**
  * Instantiate the controller
  */
-$objTabControlRunonce = new TabControlRunonce();
-$objTabControlRunonce->run();
+//$objTabControlRunonce = new TabControlRunonce();
+//$objTabControlRunonce->run();
