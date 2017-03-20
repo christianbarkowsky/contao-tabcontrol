@@ -184,8 +184,7 @@ class tl_content_tabcontrol extends \Contao\Backend
     {
         parent::__construct();
 
-        \Contao\Controller::importStatic('BackendUser');
-        \Contao\Controller::importStatic('User');
+        $this->import('BackendUser', 'User');
     }
 
 
