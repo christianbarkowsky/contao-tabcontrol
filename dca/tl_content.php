@@ -2,8 +2,8 @@
 
 /**
  * TabControl
- * 
- * @copyright  Christian Barkowsky 2012-2014, Jean-Bernard Valentaten 2009-2012
+ *
+ * @copyright  Christian Barkowsky 2012-2017, Jean-Bernard Valentaten 2009-2012
  * @package    tabControl
  * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
@@ -70,210 +70,207 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_fade'] = array
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_autoplay_delay'] = array
 (
-	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'],
-	'exclude' => true,
-	'inputType' => 'text',
-	'eval' => array('mandatory' => true, 'nospace' => true, 'rgxp' => 'digit', 'tl_class' => 'w50')
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControl']['tab_autoplay_delay'],
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array('mandatory' => true, 'nospace' => true, 'rgxp' => 'digit', 'tl_class' => 'w50')
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabControlCookies'] = array
 (
-	'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControlCookies'],
-	'exclude' => true,
-	'inputType' => 'text',
-	'eval' => array('maxlength'=>128),
-	'save_callback' => array
-	(
-		array('tl_content_tabcontrol', 'generateCookiesName')
-	),
-	'sql' => "varchar(128) NOT NULL default ''"
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['tabControlCookies'],
+    'exclude' => true,
+    'inputType' => 'text',
+    'eval' => array('maxlength'=>128),
+    'save_callback' => array
+    (
+        array('tl_content_tabcontrol', 'generateCookiesName')
+    ),
+    'sql' => "varchar(128) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
 (
-	'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs'],
-	'exclude' => true,
-	'inputType' => 'multiColumnWizard',
-	'eval' => array
-	(
-		'columnFields' => array
-		(
-			'tab_tabs_name' => array
-			(
-				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
-				'inputType' 		=> 'text',
-				'eval'                  => array('mandatory'=>true, 'style'=>'width:400px', 'allowHtml'=>true)
-			),
-			'tab_tabs_cookies_value' => array
-			(
-				'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'],
-				'inputType' 		=> 'text',
-				'eval'                  => array('style'=>'width:75px')
-			),
-			'tab_tabs_default' => array
-			(
-				'label'                 => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'],
-				'exclude'               => true,
-				'inputType'             => 'checkbox',
-				'eval'                  => array('style'=>'width:40px')
- 
-			)
-		)
-	),
-	'sql' => "blob NULL"
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs'],
+    'exclude' => true,
+    'inputType' => 'multiColumnWizard',
+    'eval' => array
+    (
+        'columnFields' => array
+        (
+            'tab_tabs_name' => array
+            (
+                'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
+                'inputType' 		=> 'text',
+                'eval'                  => array('mandatory'=>true, 'style'=>'width:400px', 'allowHtml'=>true)
+            ),
+            'tab_tabs_cookies_value' => array
+            (
+                'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'],
+                'inputType' 		=> 'text',
+                'eval'                  => array('style'=>'width:75px')
+            ),
+            'tab_tabs_default' => array
+            (
+                'label'                 => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'],
+                'exclude'               => true,
+                'inputType'             => 'checkbox',
+                'eval'                  => array('style'=>'width:40px')
+
+            )
+        )
+    ),
+    'sql' => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template'],
-	'default'                 => 'ce_tabcontrol_tab',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
-	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template'],
+    'default'                 => 'ce_tabcontrol_tab',
+    'exclude'                 => true,
+    'inputType'               => 'select',
+    'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
+    'eval'                    => array('tl_class'=>'w50'),
+    'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template_start'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template_start'],
-	'default'                 => 'ce_tabcontrol_start',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
-	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template_start'],
+    'default'                 => 'ce_tabcontrol_start',
+    'exclude'                 => true,
+    'inputType'               => 'select',
+    'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
+    'eval'                    => array('tl_class'=>'w50'),
+    'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template_stop'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template_stop'],
-	'default'                 => 'ce_tabcontrol_stop',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
-	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template_stop'],
+    'default'                 => 'ce_tabcontrol_stop',
+    'exclude'                 => true,
+    'inputType'               => 'select',
+    'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
+    'eval'                    => array('tl_class'=>'w50'),
+    'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template_end'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template_end'],
-	'default'                 => 'ce_tabcontrol_end',
-	'exclude'                 => true,
-	'inputType'               => 'select',
-	'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
-	'eval'                    => array('tl_class'=>'w50'),
-	'sql'                     => "varchar(64) NOT NULL default ''"
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_template_end'],
+    'default'                 => 'ce_tabcontrol_end',
+    'exclude'                 => true,
+    'inputType'               => 'select',
+    'options_callback'        => array('tl_content_tabcontrol', 'getTabcontrolTemplates'),
+    'eval'                    => array('tl_class'=>'w50'),
+    'sql'                     => "varchar(64) NOT NULL default ''"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_remember'] = array
 (
-	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_remember'],
-	'exclude'                 => true,
-	'inputType'               => 'checkbox',
-	'eval'                    => array('tl_class'=>'clr'),
-	'sql'                     => "char(1) NOT NULL default ''"
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['tab_remember'],
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'eval'                    => array('tl_class'=>'clr'),
+    'sql'                     => "char(1) NOT NULL default ''"
 );
 
 
-class tl_content_tabcontrol extends Backend
+class tl_content_tabcontrol extends \Contao\Backend
 {
 
-	public function __construct()
-	{
-		parent::__construct();
-		$this->import('BackendUser', 'User');
-	}
-	
-	
-	/**
-	 * Return all tabcontrol templates as array
-	 */
-	public function getTabcontrolTemplates(DataContainer $dc)
-	{
-		// Only look for a theme in the articles module (see #4808)
-		if (Input::get('do') == 'article')
-		{
-			$intPid = $dc->activeRecord->pid;
+    public function __construct()
+    {
+        parent::__construct();
 
-			if (Input::get('act') == 'overrideAll')
-			{
-				$intPid = Input::get('id');
-			}
+        \Contao\Controller::importStatic('BackendUser');
+        \Contao\Controller::importStatic('User');
+    }
 
-			// Get the page ID
-			$objArticle = $this->Database->prepare("SELECT pid FROM tl_article WHERE id=?")
-										 ->limit(1)
-										 ->execute($intPid);
 
-			// Inherit the page settings
-			$objPage = $this->getPageDetails($objArticle->pid);
+    /**
+     * Return all tabcontrol templates as array
+     */
+    public function getTabcontrolTemplates(\Contao\DataContainer $dc)
+    {
+        // Only look for a theme in the articles module (see #4808)
+        if (\Contao\Input::get('do') == 'article') {
+            $intPid = $dc->activeRecord->pid;
 
-			// Get the theme ID
-			$objLayout = LayoutModel::findByPk($objPage->layout);
+            if (\Contao\Input::get('act') == 'overrideAll') {
+                $intPid = \Contao\Input::get('id');
+            }
 
-			if ($objLayout === null)
-			{
-				return array();
-			}
-		}
-		
-		$templateSnip = '';
-		
-		switch($dc->activeRecord->tabType)
-		{		
-			case 'tabcontrolstart':
-				$templateSnip = 'start';
-				break;
-				
-			case 'tabcontrolstop':
-				$templateSnip = 'stop';
-				break;
-				
-			case 'tabcontrol_end':
-				$templateSnip = 'end';
-				break;
-			
-			case 'tabcontroltab':
-			default:
-				$templateSnip = 'tab';
-				break;
-		}
+            // Get the page ID
+            $objArticle = \Contao\Database::getInstance()->prepare("SELECT pid FROM tl_article WHERE id=?")->limit(1)->execute($intPid);
 
-		// Return all gallery templates
-		return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, $objLayout->pid);
-	}
-	
-	
-	/**
-	 * Auto-generate the cookie name
-	 */
-	public function generateCookiesName($varValue, DataContainer $dc)
-	{
-		$autoAlias = false;
+            // Inherit the page settings
+            $objPage = $this->getPageDetails($objArticle->pid);
 
-		// Generate alias if there is none
-		if ($varValue == '')
-		{
-			$autoAlias = true;
-			$varValue = standardize(String::restoreBasicEntities('tabControllCookie-' . $dc->activeRecord->id));
-		}
+            // Get the theme ID
+            $objLayout = \Contao\LayoutModel::findByPk($objPage->layout);
 
-		$objAlias = $this->Database->prepare("SELECT id FROM tl_content WHERE tabControlCookies=?")->execute($varValue);
+            if ($objLayout === null) {
+                return array();
+            }
+        }
 
-		// Check whether the cookies name alias exists
-		if ($objAlias->numRows > 1 && !$autoAlias)
-		{
-			throw new Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
-		}
+        $templateSnip = '';
 
-		// Add ID to cookies name
-		if ($objAlias->numRows && $autoAlias)
-		{
-			$varValue .= '-' . $dc->id;
-		}
+        switch($dc->activeRecord->tabType)
+        {
+            case 'tabcontrolstart':
+                $templateSnip = 'start';
+                break;
 
-		return $varValue;
-	}
+            case 'tabcontrolstop':
+                $templateSnip = 'stop';
+                break;
+
+            case 'tabcontrol_end':
+                $templateSnip = 'end';
+                break;
+
+            case 'tabcontroltab':
+            default:
+                $templateSnip = 'tab';
+                break;
+        }
+
+        // Return all gallery templates
+        return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, $objLayout->pid);
+    }
+
+
+    /**
+     * Auto-generate the cookie name
+     */
+    public function generateCookiesName($varValue, \Contao\DataContainer $dc)
+    {
+        $autoAlias = false;
+
+        // Generate alias if there is none
+        if ($varValue == '')
+        {
+            $autoAlias = true;
+            $varValue = standardize(\Contao\StringUtil::restoreBasicEntities('tabControllCookie-' . $dc->activeRecord->id));
+        }
+
+        $objAlias = \Contao\Database::getInstance()->prepare("SELECT id FROM tl_content WHERE tabControlCookies=?")->execute($varValue);
+
+        // Check whether the cookies name alias exists
+        if ($objAlias->numRows > 1 && !$autoAlias)
+        {
+            throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
+        }
+
+        // Add ID to cookies name
+        if ($objAlias->numRows && $autoAlias)
+        {
+            $varValue .= '-' . $dc->id;
+        }
+
+        return $varValue;
+    }
 }
