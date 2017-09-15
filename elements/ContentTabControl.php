@@ -63,7 +63,7 @@ class ContentTabControl extends \ContentElement
 							foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback)
 							{
 								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]();
+								$this->$callback[0]->{$callback[1]}();
 							}
 						}
 						else
@@ -78,7 +78,7 @@ class ContentTabControl extends \ContentElement
 							foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback)
 							{
 								$this->import($callback[0]);
-								$this->$callback[0]->$callback[1]();
+								$this->$callback[0]->{$callback[1]}();
 							}
 						}
 						else
