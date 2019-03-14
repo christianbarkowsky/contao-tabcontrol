@@ -92,7 +92,6 @@ class ContentTabControl extends ContentElement
 
                     $this->Template = new BackendTemplate('be_wildcard');
                     $this->Template->wildcard = '### TABCONTROL: TABGROUP START ###';
-                    $this->Template->cssID = 'wrapper_start';
                     $this->Template->title = $titleList;
                 }
                 break;
