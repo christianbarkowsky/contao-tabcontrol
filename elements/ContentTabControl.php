@@ -58,8 +58,8 @@ class ContentTabControl extends ContentElement
                     if (!is_array($GLOBALS['TL_JAVASCRIPT'])) {
                         if (isset($GLOBALS['TL_HOOKS']['tabControlJS']) && is_array($GLOBALS['TL_HOOKS']['tabControlJS'])) {
                             foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback) {
-                                $this->import($callback[0]);
-                                $this->$callback[0]->{$callback[1]}();
+                                $objCallback = \Contao\System::importStatic($callback[0]);
+                                $objCallback->{$callback[1]}();
                             }
                         } else {
                             $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/tabcontrol/assets/js/moo_tabcontrol.js';
@@ -68,8 +68,8 @@ class ContentTabControl extends ContentElement
                     elseif (!in_array($this->strPlugin, $GLOBALS['TL_JAVASCRIPT'])) {
                         if (isset($GLOBALS['TL_HOOKS']['tabControlJS']) && is_array($GLOBALS['TL_HOOKS']['tabControlJS'])) {
                             foreach ($GLOBALS['TL_HOOKS']['tabControlJS'] as $callback) {
-                                $this->import($callback[0]);
-                                $this->$callback[0]->{$callback[1]}();
+                                $objCallback = \Contao\System::importStatic($callback[0]);
+                                $objCallback->{$callback[1]}();
                             }
                         } else {
                             $GLOBALS['TL_JAVASCRIPT'][] = 'system/modules/tabcontrol/assets/js/moo_tabcontrol.js';
@@ -92,6 +92,7 @@ class ContentTabControl extends ContentElement
 
                     $this->Template = new BackendTemplate('be_wildcard');
                     $this->Template->wildcard = '### TABCONTROL: TABGROUP START ###';
+                    $this->Template->cssID = 'wrapper_start';
                     $this->Template->title = $titleList;
                 }
                 break;
