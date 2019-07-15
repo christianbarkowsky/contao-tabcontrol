@@ -4,7 +4,7 @@
 
 ### More informations and examples
 
-* http://christianbarkowsky.de/contao-tabcontrol.html
+* https://brkwsky.de/tabcontrol-contao
 
 ### Dependencies
 The following Contao extensions are required to run this extension:
