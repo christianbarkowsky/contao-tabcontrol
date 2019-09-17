@@ -1,5 +1,5 @@
 {
-  "name":"christianbarkowsky/tabcontrol",
+  "name":"christianbarkowsky/contao-tabcontrol",
   "description":"Create tabs as content element. Extension for Contao Open Source CMS",
   "keywords":["tab", "tabs", "tabcontrol", "contao"],
   "type":"contao-module",
@@ -7,15 +7,15 @@
   "authors":[
     {
       "name":"Christian Barkowsky",
-      "homepage":"http://christianbarkowsky.de",
-      "email":"hallo@christianbarkowsky.de",
+      "homepage":"https://brkwsky.de",
+      "email":"hallo@brkwsky.de",
       "role":"Developer"
     }
   ],
   "support": {
-    "email": "hallo@christianbarkowsky.de",
-    "issues": "https://github.com/christianbarkowsky/tabcontrol/issues",
-    "source": "https://github.com/christianbarkowsky/tabcontrol"
+    "email": "hallo@brkwsky.de",
+    "issues": "https://github.com/christianbarkowsky/contao-tabcontrol/issues",
+    "source": "https://github.com/christianbarkowsky/contao-tabcontrol"
   },
   "require":{
     "php":">=5.4.0",
