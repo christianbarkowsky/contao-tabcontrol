@@ -238,7 +238,7 @@ class tl_content_tabcontrol extends \Contao\Backend
         }
 
         // Return all gallery templates
-        return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, $objLayout->pid);
+        return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, [$objLayout->pid]);
     }
 
 
