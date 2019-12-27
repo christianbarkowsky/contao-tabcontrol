@@ -3,12 +3,19 @@
 /**
  * TabControl
  *
- * @copyright  Christian Barkowsky 2012-2017, Jean-Bernard Valentaten 2009-2012
+ * @copyright  Christian Barkowsky 2012-2019, Jean-Bernard Valentaten 2009-2012
  * @package    tabControl
  * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
  */
 
+use Contao\Input;
+use Contao\Backend;
+use Contao\Database;
+use Contao\Controller;
+use Contao\StringUtil;
+use Contao\LayoutModel;
+use Contao\DataContainer;
 
 // Palettes
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
@@ -176,10 +183,15 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_remember'] = array
     'sql'                     => "char(1) NOT NULL default ''"
 );
 
-
-class tl_content_tabcontrol extends \Contao\Backend
+/**
+ * Class tl_content_tabcontrol
+ */
+class tl_content_tabcontrol extends Backend
 {
 
+    /**
+     * tl_content_tabcontrol constructor.
+     */
     public function __construct()
     {
         parent::__construct();
@@ -187,28 +199,30 @@ class tl_content_tabcontrol extends \Contao\Backend
         $this->import('BackendUser', 'User');
     }
 
-
     /**
      * Return all tabcontrol templates as array
+     *
+     * @param DataContainer $dc
+     * @return array
      */
-    public function getTabcontrolTemplates(\Contao\DataContainer $dc)
+    public function getTabcontrolTemplates(DataContainer $dc)
     {
         // Only look for a theme in the articles module (see #4808)
-        if (\Contao\Input::get('do') == 'article') {
+        if (Input::get('do') == 'article') {
             $intPid = $dc->activeRecord->pid;
 
-            if (\Contao\Input::get('act') == 'overrideAll') {
-                $intPid = \Contao\Input::get('id');
+            if (Input::get('act') == 'overrideAll') {
+                $intPid = Input::get('id');
             }
 
             // Get the page ID
-            $objArticle = \Contao\Database::getInstance()->prepare("SELECT pid FROM tl_article WHERE id=?")->limit(1)->execute($intPid);
+            $objArticle = Database::getInstance()->prepare("SELECT pid FROM tl_article WHERE id=?")->limit(1)->execute($intPid);
 
             // Inherit the page settings
-            $objPage = $this->getPageDetails($objArticle->pid);
+            $objPage = Controller::getPageDetails($objArticle->pid);
 
             // Get the theme ID
-            $objLayout = \Contao\LayoutModel::findByPk($objPage->layout);
+            $objLayout = LayoutModel::findByPk($objPage->layout);
 
             if ($objLayout === null) {
                 return array();
@@ -241,32 +255,34 @@ class tl_content_tabcontrol extends \Contao\Backend
         return $this->getTemplateGroup('ce_tabcontrol_' . $templateSnip, [$objLayout->pid]);
     }
 
-
     /**
      * Auto-generate the cookie name
+     * @param $varValue
+     * @param DataContainer $dc
+     * @return string
+     * @throws Exception
      */
-    public function generateCookiesName($varValue, \Contao\DataContainer $dc)
+    public function generateCookiesName($varValue, DataContainer $dc)
     {
         $autoAlias = false;
 
         // Generate alias if there is none
-        if ($varValue == '')
-        {
+        if ($varValue == '') {
             $autoAlias = true;
-            $varValue = standardize(\Contao\StringUtil::restoreBasicEntities('tabControllCookie-' . $dc->activeRecord->id));
+            $varValue = StringUtil::standardize(StringUtil::restoreBasicEntities('tabControllCookie-' . $dc->activeRecord->id));
         }
 
-        $objAlias = \Contao\Database::getInstance()->prepare("SELECT id FROM tl_content WHERE tabControlCookies=?")->execute($varValue);
+        $objAlias = Database::getInstance()
+            ->prepare("SELECT id FROM tl_content WHERE tabControlCookies=?")
+            ->execute($varValue);
 
         // Check whether the cookies name alias exists
-        if ($objAlias->numRows > 1 && !$autoAlias)
-        {
+        if ($objAlias->numRows > 1 && !$autoAlias) {
             throw new \Exception(sprintf($GLOBALS['TL_LANG']['ERR']['aliasExists'], $varValue));
         }
 
         // Add ID to cookies name
-        if ($objAlias->numRows && $autoAlias)
-        {
+        if ($objAlias->numRows && $autoAlias) {
             $varValue .= '-' . $dc->id;
         }
 
