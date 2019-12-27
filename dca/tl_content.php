@@ -35,7 +35,11 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabType'] = array
     'inputType' => 'radio',
     'options' => array('tabcontroltab', 'tabcontrolstart', 'tabcontrolstop', 'tabcontrol_end'),
     'reference' => &$GLOBALS['TL_LANG']['tl_content']['tabControl'],
-    'eval' => array('helpwizard' => true, 'submitOnChange' => true)
+    'eval' => [
+        'helpwizard' => true,
+        'submitOnChange' => true,
+        'tl_class' => 'clr'
+    ]
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabClasses'] = array
