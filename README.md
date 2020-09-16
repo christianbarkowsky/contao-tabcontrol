@@ -7,9 +7,8 @@
 * https://brkwsky.de/tabcontrol-contao
 
 ### Dependencies
-The following Contao extensions are required to run this extension:
 
-* MultiColumnWizard https://github.com/menatwork/MultiColumnWizard
+- [menatwork/contao-multicolumnwizard-bundle](https://github.com/menatwork/contao-multicolumnwizard-bundle)
 
 ### Requirements
-* Contao 3.0.* or higher
+* Contao 4.4.* or higher
