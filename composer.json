@@ -19,9 +19,8 @@
   },
   "require":{
     "php":"^7.1",
-    "contao/core-bundle":"~4.4",
-    "contao-community-alliance/composer-plugin":"~2.4 || ~3.0",
-    "menatwork/contao-multicolumnwizard-bundle": "^3.3"
+    "contao/core-bundle":"4.4",
+    "menatwork/contao-multicolumnwizard-bundle": "^3.4"
   },
   "replace": {
     "contao-legacy/tabcontrol": "self.version"
