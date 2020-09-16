@@ -3,18 +3,20 @@
 /**
  * TabControl
  * 
- * @copyright  Christian Barkowsky 2011-2014, Jean-Bernard Valentaten 2009-2011
+ * @copyright  Christian Barkowsky 2011-2020, Jean-Bernard Valentaten 2009-2011
  * @package    tabControl
  * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
  */
 
+/**
+ * Content element
+ */
+$GLOBALS['TL_LANG']['CTE']['tabcontrol'] = ["Reiter/Tabs", 'Erzeugt ein neues Reiterelement.'];
 
 /**
  * Fields
  */
-$GLOBALS['TL_LANG']['CTE']['tabcontrol']['0'] = "Reiter";
-$GLOBALS['TL_LANG']['CTE']['tabcontrol']['1'] = "erzeugt ein neues Reiterelement";
 $GLOBALS['TL_LANG']['tl_content']['tabBehaviour']['0'] = "Verhaltensweise";
 $GLOBALS['TL_LANG']['tl_content']['tabBehaviour']['1'] = "Stellen Sie hier ein auf welches Ereignis die Reiter reagieren sollen.";
 $GLOBALS['TL_LANG']['tl_content']['tabClasses']['0'] = "Klassennamen";
@@ -52,7 +54,6 @@ $GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'] = 'Cookie-Wert';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'] = 'Standard';
 $GLOBALS['TL_LANG']['tl_content']['tab_remember'][0] = 'Aktiven Reiter merken';
 $GLOBALS['TL_LANG']['tl_content']['tab_remember'][1] = 'Der aktive Reiter wird als Cookie gespeichert.';
-
 
 /**
  * Legends

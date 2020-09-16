@@ -3,19 +3,21 @@
 /**
  * TabControl
  *
- * @copyright  Christian Barkowsky 2012-2019, Jean-Bernard Valentaten 2009-2012
+ * @copyright  Christian Barkowsky 2012-2020, Jean-Bernard Valentaten 2009-2012
  * @package    tabControl
  * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
  */
 
-use Contao\Input;
+namespace Contao;
+
 use Contao\Backend;
-use Contao\Database;
 use Contao\Controller;
-use Contao\StringUtil;
-use Contao\LayoutModel;
+use Contao\Database;
 use Contao\DataContainer;
+use Contao\Input;
+use Contao\LayoutModel;
+use Contao\StringUtil;
 
 // Palettes
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
@@ -24,7 +26,6 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontroltab'] = '{type_legend},t
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstart'] = '{type_legend},type,tabType;{tab_legend},tabClasses;{template_legend:hide},tab_template_start;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrolstop'] = '{type_legend},type,tabType;{template_legend:hide},tab_template_stop;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol_end'] = '{type_legend},type,tabType;{template_legend:hide},tab_template_end;{protected_legend:hide},protected;{expert_legend:hide},guests;{invisible_legend:hide},invisible,start,stop';
-
 
 // Fields
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabType'] = array
@@ -100,39 +101,32 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabControlCookies'] = array
     'sql' => "varchar(128) NOT NULL default ''"
 );
 
-$GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = array
-(
+$GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs'],
     'exclude' => true,
     'inputType' => 'multiColumnWizard',
-    'eval' => array
-    (
-        'columnFields' => array
-        (
-            'tab_tabs_name' => array
-            (
-                'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
-                'inputType' 		=> 'text',
-                'eval'                  => array('mandatory'=>true, 'style'=>'width:400px', 'allowHtml'=>true)
-            ),
-            'tab_tabs_cookies_value' => array
-            (
-                'label' 		=> &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'],
-                'inputType' 		=> 'text',
-                'eval'                  => array('style'=>'width:75px')
-            ),
-            'tab_tabs_default' => array
-            (
-                'label'                 => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'],
-                'exclude'               => true,
-                'inputType'             => 'checkbox',
-                'eval'                  => array('style'=>'width:40px')
-
-            )
-        )
-    ),
+    'eval' => [
+        'columnFields' => [
+            'tab_tabs_name' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_name'],
+                'inputType' => 'text',
+                'eval' => ['mandatory' => true, 'style' => 'width:400px', 'allowHtml' => true]
+            ],
+            'tab_tabs_cookies_value' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'],
+                'inputType' => 'text',
+                'eval' => ['style' => 'width:75px']
+            ],
+            'tab_tabs_default' => [
+                'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'],
+                'exclude' => true,
+                'inputType' => 'checkbox',
+                'eval' => ['style' => 'width:40px']
+            ]
+        ]
+    ],
     'sql' => "blob NULL"
-);
+];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template'] = array
 (
@@ -200,7 +194,7 @@ class tl_content_tabcontrol extends Backend
     {
         parent::__construct();
 
-        $this->import('BackendUser', 'User');
+        System::importStatic('BackendUser', 'User');
     }
 
     /**
@@ -220,7 +214,10 @@ class tl_content_tabcontrol extends Backend
             }
 
             // Get the page ID
-            $objArticle = Database::getInstance()->prepare("SELECT pid FROM tl_article WHERE id=?")->limit(1)->execute($intPid);
+            $objArticle = Database::getInstance()
+                ->prepare("SELECT pid FROM tl_article WHERE id=?")
+                ->limit(1)
+                ->execute($intPid);
 
             // Inherit the page settings
             $objPage = Controller::getPageDetails($objArticle->pid);
@@ -229,14 +226,13 @@ class tl_content_tabcontrol extends Backend
             $objLayout = LayoutModel::findByPk($objPage->layout);
 
             if ($objLayout === null) {
-                return array();
+                return [];
             }
         }
 
         $templateSnip = '';
 
-        switch($dc->activeRecord->tabType)
-        {
+        switch($dc->activeRecord->tabType) {
             case 'tabcontrolstart':
                 $templateSnip = 'start';
                 break;

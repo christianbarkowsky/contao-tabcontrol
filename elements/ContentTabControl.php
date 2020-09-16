@@ -3,7 +3,7 @@
 /**
  * TabControl
  *
- * @copyright  Christian Barkowsky 2012-2019, Jean-Bernard Valentaten 2009-2012
+ * @copyright  Christian Barkowsky 2012-2020, Jean-Bernard Valentaten 2009-2012
  * @package    tabControl
  * @author     Christian Barkowsky <http://www.christianbarkowsky.de>, Jean-Bernard Valentaten <troggy.brains@gmx.de>
  * @license    LGPL
@@ -33,7 +33,7 @@ class ContentTabControl extends ContentElement
     /**
      * Contains the default classes used in our tab-template
      */
-    private static $defaultClasses = array('tabs', 'panes');
+    private static $defaultClasses = ['tabs', 'panes'];
 
     /**
      * Generate content element
