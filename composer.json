@@ -12,10 +12,17 @@
       "role":"Developer"
     }
   ],
+  "funding": [
+    {
+      "type": "github",
+      "url": "https://github.com/sponsors/christianbarkowsky"
+    }
+  ],
   "support": {
     "email": "hallo@brkwsky.de",
     "issues": "https://github.com/christianbarkowsky/contao-tabcontrol/issues",
-    "source": "https://github.com/christianbarkowsky/contao-tabcontrol"
+    "source": "https://github.com/christianbarkowsky/contao-tabcontrol",
+    "docs": "https://brkwsky.de/tabcontrol-contao"
   },
   "require":{
     "php":"^7.1",

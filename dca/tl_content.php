@@ -3,9 +3,9 @@
 /**
  * TabControl
  *
- * @copyright  Christian Barkowsky 2012-2020, Jean-Bernard Valentaten 2009-2012
+ * @copyright  Christian Barkowsky 2012-2021
  * @package    tabControl
- * @author     Christian Barkowsky <http://christianbarkowsky.de>
+ * @author     Christian Barkowsky <http://brkwsky.de>
  * @license    LGPL
  */
 
