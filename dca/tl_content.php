@@ -62,7 +62,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabClasses'] = [
 ];
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabBehaviour'] = [
-    'label' => $GLOBALS['TL_LANG']['tl_content']['tabBehaviour'],
+    'label' => &$GLOBALS['TL_LANG']['tl_content']['tabBehaviour'],
     'exclude' => true,
     'search' => false,
     'inputType' => 'select',
