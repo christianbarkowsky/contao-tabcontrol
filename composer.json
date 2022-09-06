@@ -7,8 +7,8 @@
   "authors":[
     {
       "name":"Christian Barkowsky",
-      "homepage":"https://brkwsky.de",
-      "email":"hallo@brkwsky.de",
+      "homepage":"https://plenta.io",
+      "email":"hallo@plenta.io",
       "role":"Developer"
     }
   ],
@@ -19,10 +19,10 @@
     }
   ],
   "support": {
-    "email": "hallo@brkwsky.de",
+    "email": "hallo@plenta.io",
     "issues": "https://github.com/christianbarkowsky/contao-tabcontrol/issues",
     "source": "https://github.com/christianbarkowsky/contao-tabcontrol",
-    "docs": "https://brkwsky.de/tabcontrol-contao"
+    "docs": "https://plenta.io/tabcontrol-contao"
   },
   "require":{
     "php":"^7.1 || ^8.0",
