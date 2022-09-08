@@ -2,13 +2,13 @@
   "name":"christianbarkowsky/contao-tabcontrol",
   "description":"Create tabs as content element. Extension for Contao Open Source CMS",
   "keywords":["tab", "tabs", "tabcontrol", "contao"],
-  "type":"contao-module",
+  "type":"contao-bundle",
   "license":"LGPL-3.0+",
   "authors":[
     {
-      "name":"Christian Barkowsky",
-      "homepage":"https://brkwsky.de",
-      "email":"hallo@brkwsky.de",
+      "name":"Plenta",
+      "homepage":"https://plenta.io",
+      "email":"hallo@plenta.io",
       "role":"Developer"
     }
   ],
@@ -19,24 +19,38 @@
     }
   ],
   "support": {
-    "email": "hallo@brkwsky.de",
+    "email": "hallo@plenta.io",
     "issues": "https://github.com/christianbarkowsky/contao-tabcontrol/issues",
     "source": "https://github.com/christianbarkowsky/contao-tabcontrol",
-    "docs": "https://brkwsky.de/tabcontrol-contao"
+    "docs": "https://plenta.io/tabcontrol-contao"
   },
   "require":{
-    "php":"^7.1 || ^8.0",
-    "contao/core-bundle":"^4.4",
+    "php":"^7.4 || ^8.0",
+    "contao/core-bundle":"^4.9",
     "menatwork/contao-multicolumnwizard-bundle": "^3.3"
   },
-  "replace": {
-    "contao-legacy/tabcontrol": "self.version"
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^2.12",
+    "contao/manager-bundle": "~4.9"
   },
-  "extra":{
-    "contao": {
-      "sources":{
-        "": "system/modules/tabcontrol"
-      }
+  "extra": {
+    "contao-manager-plugin": "Plenta\\TabControl\\ContaoManager\\Plugin"
+  },
+  "autoload": {
+    "psr-4": {
+      "Plenta\\TabControl\\": "src/Plenta/TabControl"
     }
+  },
+  "config": {
+    "allow-plugins": {
+      "composer/package-versions-deprecated": true,
+      "contao-components/installer": true,
+      "contao/manager-plugin": true,
+      "contao-community-alliance/composer-plugin": true
+    }
+  },
+  "replace": {
+    "contao-legacy/tabcontrol": "self.version",
+    "contao-legacy/contao-tabcontrol": "self.version"
   }
 }

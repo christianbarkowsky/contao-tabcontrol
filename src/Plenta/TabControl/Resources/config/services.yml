@@ -1,0 +1,12 @@
+services:
+    _defaults:
+        autoconfigure: true
+        autowire: true
+        public: false
+
+    Plenta\TabControl\:
+            resource: ../../../TabControl
+            exclude: ../../../TabControl/{Entity,Migrations,Resources,Tests,Classes}
+
+    Plenta\TabControl\Controller\Contao\ContentElement\TabControlController:
+        public: true

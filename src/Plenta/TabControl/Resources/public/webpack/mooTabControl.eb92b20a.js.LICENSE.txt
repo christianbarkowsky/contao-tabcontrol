@@ -1,0 +1,8 @@
+/**
+ * TabControl creates tabs for defined contents.
+ *
+ * @uses MooTools
+ * @license MIT-style license
+ * @author Christian Barkowsky <http://christianbarkowsky.de>
+ * @author Jean-Bernard Valentaten - <troggy.brains@gmx.de>
+ */
