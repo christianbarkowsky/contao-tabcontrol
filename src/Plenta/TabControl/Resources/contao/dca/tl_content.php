@@ -11,6 +11,12 @@ declare(strict_types=1);
  * @link          https://github.com/plenta/
  */
 
+use Contao\Input;
+use Contao\Backend;
+use Contao\Message;
+use Contao\ContentModel;
+
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = ['tl_content_tabcontrol', 'showMootoolsHint'];
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol'] = '{type_legend},type,tabType;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
@@ -184,7 +190,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_remember'] = [
 /**
  * Class tl_content_tabcontrol.
  */
-class tl_content_tabcontrol extends \Contao\Backend
+class tl_content_tabcontrol extends Backend
 {
     /**
      * tl_content_tabcontrol constructor.
@@ -192,7 +198,6 @@ class tl_content_tabcontrol extends \Contao\Backend
     public function __construct()
     {
         parent::__construct();
-
         System::importStatic('BackendUser', 'User');
     }
 
@@ -287,5 +292,26 @@ class tl_content_tabcontrol extends \Contao\Backend
         }
 
         return $varValue;
+    }
+
+    /**
+     * @param object $dc
+     * @return void
+     */
+    public function showMootoolsHint($dc)
+    {
+        if ($_POST || Input::get('act') != 'edit') {
+            return;
+        }
+
+        $objCte = ContentModel::findByPk($dc->id);
+
+        if ($objCte === null) {
+            return;
+        }
+
+        if ('tabcontrol' === $objCte->type) {
+            Message::addInfo($GLOBALS['TL_LANG']['tl_content']['tabControl_mootoolsHint']);
+        }
     }
 }

@@ -3,7 +3,7 @@
 /**
  * TabControl
  * 
- * @copyright  Christian Barkowsky 2011-2020, Jean-Bernard Valentaten 2009-2011
+ * @copyright  Christian Barkowsky 2011-2022, Jean-Bernard Valentaten 2009-2011
  * @package    tabControl
  * @author     Christian Barkowsky <http://christianbarkowsky.de>
  * @license    LGPL
@@ -54,6 +54,7 @@ $GLOBALS['TL_LANG']['tl_content']['tab_tabs_cookies_value'] = 'Cookie-Wert';
 $GLOBALS['TL_LANG']['tl_content']['tab_tabs_default'] = 'Standard';
 $GLOBALS['TL_LANG']['tl_content']['tab_remember'][0] = 'Aktiven Reiter merken';
 $GLOBALS['TL_LANG']['tl_content']['tab_remember'][1] = 'Der aktive Reiter wird als Cookie gespeichert.';
+$GLOBALS['TL_LANG']['tl_content']['tabControl_mootoolsHint'] = 'Bitte aktivieren sie Mootools im Seitenlayout.';
 
 /**
  * Legends
