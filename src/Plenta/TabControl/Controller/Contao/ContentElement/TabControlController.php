@@ -144,8 +144,10 @@ class TabControlController extends AbstractContentElementController
         }
 
         $articleAlias = $this->getArticleAlias($model->pid);
+        $modelCssId = StringUtil::deserialize($model->cssID);
 
         $template->id = $model->id;
+        $template->class = trim('ce_'.$model->type. ' '.($modelCssId[1] ?? ''));
         $template->articleAlias = $articleAlias ? '#'.$articleAlias : '.mod_article';
         $template->behaviour = $model->tabBehaviour;
         $template->panes = $classes[1];
