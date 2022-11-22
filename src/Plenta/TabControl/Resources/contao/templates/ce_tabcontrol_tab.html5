@@ -1,29 +1,29 @@
 <!-- indexer::stop -->
 <script>
-    function loadTabControl_<?php echo $this->id; ?>() {
-        window.TC_<?php echo $this->id; ?> = new Array();
+    function loadTabControl_<?= $this->id; ?>() {
+        window.TC_<?= $this->id; ?> = new Array();
         i = 0;
-        $$('#tabcontrol_<?php echo $this->id; ?>').each(function(s) {
+        $$('#tabcontrol_<?= $this->id; ?>').each(function(s) {
             i++;
-            elements = s.getElements('<?php echo $this->tabsSelector; ?>');
+            elements = s.getElements('<?= $this->tabsSelector; ?>');
             if(elements.length){
                 var tcControl = new TabControl(s, {
                     <?php if ($this->tab_autoplay_autoSlide): ?>
                     autoSlide: true,
                     <?php endif; ?>
                     <?php if ($this->tab_autoplay_delay): ?>
-                    delay: <?php echo $this->tab_autoplay_delay; ?>,
+                    delay: <?= $this->tab_autoplay_delay; ?>,
                     <?php endif; ?>
-                    tab_remember: <?php echo (empty($this->tab_remember))?0: 1; ?>,
-                    tab_cookiename: '<?php echo $this->tabControlCookies; ?>',
-                    tab_control: 'tabcontrol_<?php echo $this->id; ?>',
-                    behaviour: '<?php echo $this->behaviour; ?>',
-                    tabs: s.getElements('<?php echo $this->tabsSelector; ?>'),
-                    panes: s.getElements('<?php echo $this->panesSelector; ?>'),
+                    tab_remember: <?= (empty($this->tab_remember))?0: 1; ?>,
+                    tab_cookiename: '<?= $this->tabControlCookies; ?>',
+                    tab_control: 'tabcontrol_<?= $this->id; ?>',
+                    behaviour: '<?= $this->behaviour; ?>',
+                    tabs: s.getElements('<?= $this->tabsSelector; ?>'),
+                    panes: s.getElements('<?= $this->panesSelector; ?>'),
                     selectedClass: 'selected',
                     hoverClass: 'hover'
                     <?php if ($this->tab_autoplay_fade): ?>, addFade: true<?php endif; ?>
-                    <?php if ($this->tab_tabs_default): ?>,defaultTab: <?php echo $this->tab_tabs_default; ?><?php endif; ?>
+                    <?php if ($this->tab_tabs_default): ?>,defaultTab: <?= $this->tab_tabs_default; ?><?php endif; ?>
 
                 });
 
@@ -31,7 +31,7 @@
                     tcControl.onTabHashChange();
                 });
 
-                window.TC_<?php echo $this->id; ?>[i] = tcControl;
+                window.TC_<?= $this->id; ?>[i] = tcControl;
             }
         });
     }
@@ -40,21 +40,21 @@
      * Bootstrap
      */
     (function($) {
-        window.addEvent('domready', loadTabControl_<?php echo $this->id; ?>);
+        window.addEvent('domready', loadTabControl_<?= $this->id; ?>);
     })(document.id);
 </script>
 <!-- indexer::continue -->
 
-<div id="tabcontrol_<?php echo $this->id; ?>" class="<?php echo $this->class; ?> block"<?php echo $this->cssID; ?><?php if ($this->style): ?> style="<?php echo $this->style; ?>"<?php endif; ?>>
+<div id="tabcontrol_<?= $this->id; ?>" class="<?= $this->class; ?> block"<?= $this->cssID; ?><?php if ($this->style): ?> style="<?= $this->style; ?>"<?php endif; ?>>
 
     <?php if ($this->headline): ?>
-    <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
+    <<?= $this->hl; ?>><?= $this->headline; ?></<?= $this->hl; ?>>
 <?php endif; ?>
 
 <div class="tabcontrol_tabs block">
     <ul>
         <?php foreach ($this->titles as $key => $title) : ?>
-            <li class="<?php echo $this->tabs . ' tab_' . $key; ?>" id="<?php echo $this->id."_".$key?>"><?php echo $title; ?></li>
+            <li class="<?= $this->tabs . ' tab_' . $key; ?>" id="<?= $this->id."_".$key?>"><?= $title; ?></li>
         <?php endforeach; ?>
     </ul>
 </div>

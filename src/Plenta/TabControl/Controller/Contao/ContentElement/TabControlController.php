@@ -145,6 +145,7 @@ class TabControlController extends AbstractContentElementController
 
         $articleAlias = $this->getArticleAlias($model->pid);
 
+        $template->id = $model->id;
         $template->articleAlias = $articleAlias ? '#'.$articleAlias : '.mod_article';
         $template->behaviour = $model->tabBehaviour;
         $template->panes = $classes[1];
@@ -190,7 +191,10 @@ class TabControlController extends AbstractContentElementController
      */
     protected function getArticleAlias($pid)
     {
-        $objArticle = Database::getInstance()->prepare('SELECT id, alias FROM tl_article WHERE id=?')->limit(1)->execute($pid);
+        $objArticle = Database::getInstance()
+            ->prepare('SELECT id, alias FROM tl_article WHERE id=?')
+            ->limit(1)
+            ->execute($pid);
 
         if ($objArticle->numRows) {
             return $objArticle->alias;
