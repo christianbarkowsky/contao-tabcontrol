@@ -21,7 +21,7 @@ use Contao\ManagerPlugin\Config\ConfigPluginInterface;
 use Plenta\TabControl\PlentaTabControlBundle;
 use Symfony\Component\Config\Loader\LoaderInterface;
 
-class Plugin implements BundlePluginInterface/*, ConfigPluginInterface*/
+class Plugin implements BundlePluginInterface, ConfigPluginInterface
 {
     public function getBundles(ParserInterface $parser): array
     {
@@ -33,10 +33,8 @@ class Plugin implements BundlePluginInterface/*, ConfigPluginInterface*/
         ];
     }
 
-    /*
     public function registerContainerConfiguration(LoaderInterface $loader, array $managerConfig): void
     {
         $loader->load(__DIR__.'/../../config/config.php');
     }
-    */
 }
