@@ -25,21 +25,21 @@
     "docs": "https://plenta.io/tabcontrol-contao"
   },
   "require":{
-    "php":"^7.4 || ^8.0",
-    "contao/core-bundle":"^4.9",
+    "php":"^8.1",
+    "contao/core-bundle":"^5.3",
     "menatwork/contao-multicolumnwizard-bundle": "^3.3"
   },
   "require-dev": {
-    "friendsofphp/php-cs-fixer": "^2.12",
-    "contao/manager-bundle": "~4.9"
-  },
-  "extra": {
-    "contao-manager-plugin": "Plenta\\TabControl\\ContaoManager\\Plugin"
+    "friendsofphp/php-cs-fixer": "^3.2",
+    "contao/manager-plugin": "^2.0"
   },
   "autoload": {
     "psr-4": {
-      "Plenta\\TabControl\\": "src/Plenta/TabControl"
+      "Plenta\\TabControl\\": "src/"
     }
+  },
+  "extra": {
+    "contao-manager-plugin": "Plenta\\TabControl\\ContaoManager\\Plugin"
   },
   "config": {
     "allow-plugins": {
@@ -48,9 +48,5 @@
       "contao/manager-plugin": true,
       "contao-community-alliance/composer-plugin": true
     }
-  },
-  "replace": {
-    "contao-legacy/tabcontrol": "self.version",
-    "contao-legacy/contao-tabcontrol": "self.version"
   }
 }

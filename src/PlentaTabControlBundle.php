@@ -14,10 +14,17 @@ declare(strict_types=1);
 namespace Plenta\TabControl;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
+use Plenta\TabControl\DependencyInjection\PlentaTabControlExtension;
 
-/**
- * Configures the bundle.
- */
 class PlentaTabControlBundle extends Bundle
 {
+    public function getPath(): string
+    {
+        return \dirname(__DIR__);
+    }
+
+    public function getContainerExtension(): PlentaTabControlExtension
+    {
+        return new PlentaTabControlExtension();
+    }
 }

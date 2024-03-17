@@ -5,7 +5,7 @@ declare(strict_types=1);
 /**
  * Plenta Tab Control Bundle for Contao Open Source CMS
  *
- * @copyright     Copyright (c) 2012-2022, Plenta.io
+ * @copyright     Copyright (c) 2012-2024, Plenta.io
  * @author        Plenta.io <https://plenta.io>
  * @license       http://opensource.org/licenses/lgpl-3.0.html
  * @link          https://github.com/plenta/
@@ -21,31 +21,22 @@ use Contao\FrontendTemplate;
 use Contao\Input;
 use Contao\StringUtil;
 use Contao\System;
-use Contao\Template;
-use Symfony\Component\Asset\Package;
+use Contao\CoreBundle\Twig\FragmentTemplate;
 use Symfony\Component\Asset\Packages;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Contao\CoreBundle\ServiceAnnotation\ContentElement;
+use Contao\CoreBundle\DependencyInjection\Attribute\AsContentElement;
 
-/**
- * @ContentElement("tabcontrol", category="texts", template="ce_tabcontrol_tab")
- */
+#[AsContentElement('tabcontrol', category:'texts', template:'ce_tabcontrol_tab')]
 class TabControlController extends AbstractContentElementController
 {
-    /**
-     * Contains the default classes used in our tab-template.
-     */
     private static $defaultClasses = ['tabs', 'panes'];
 
-    protected Packages $packages;
-
-    public function __construct(Packages $packages)
+    public function __construct(protected Packages $packages)
     {
-        $this->packages = $packages;
     }
 
-    public function getResponse(Template $template, ContentModel $model, Request $request): ?Response
+    public function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): ?Response
     {
         static $panelIndex = 0;
 

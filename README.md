@@ -1,6 +1,6 @@
 [![Version](http://img.shields.io/packagist/v/christianbarkowsky/tabcontrol.svg?style=flat-square)](https://packagist.org/packages/christianbarkowsky/tabcontrol)
 
-# Tabs for Contao [TabControl]
+# Tabs for Contao [TabControl 2]
 
 ### More informations and examples
 
@@ -11,4 +11,4 @@
 - [menatwork/contao-multicolumnwizard-bundle](https://github.com/menatwork/contao-multicolumnwizard-bundle)
 
 ### Requirements
-* Contao 4.4.* or higher
+* Contao 5.3.* or higher
