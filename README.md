@@ -6,9 +6,5 @@
 
 * https://brkwsky.de/tabcontrol-contao
 
-### Dependencies
-
-- [menatwork/contao-multicolumnwizard-bundle](https://github.com/menatwork/contao-multicolumnwizard-bundle)
-
 ### Requirements
 * Contao 5.3.* or higher

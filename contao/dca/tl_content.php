@@ -19,15 +19,15 @@ use Contao\ContentModel;
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = ['tl_content_tabcontrol', 'showMootoolsHint'];
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'tabType';
+
 $GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol'] = '{type_legend},type,tabType;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space;{invisible_legend:hide},invisible,start,stop';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['tabcontrol_group'] = '{type_legend},type,headline;{template_legend:hide},customTpl;{protected_legend:hide},protected;{expert_legend:hide},cssID;{invisible_legend:hide},invisible,start,stop';
+
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['tabType_tabcontroltab'] = ';{tab_legend},tabControlCookies,tab_tabs,tabBehaviour,tabClasses,tab_remember;{tabcontrol_autoplay_legend:hide},tab_autoplay_autoSlide,tab_autoplay_delay,tab_autoplay_fade;{template_legend:hide},tab_template;';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['tabType_tabcontrolstart'] = ';{tab_legend},tabClasses;{template_legend:hide},tab_template_start;';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['tabType_tabcontrolstop'] = ';{template_legend:hide},tab_template_stop;';
 $GLOBALS['TL_DCA']['tl_content']['subpalettes']['tabType_tabcontrol_end'] = ';{template_legend:hide},tab_template_end;';
 
-/*
- * Fields
- */
 $GLOBALS['TL_DCA']['tl_content']['fields']['tabType'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['tabType'],
     'default' => 'tabcontroltab',
@@ -112,6 +112,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tabControlCookies'] = [
     'sql' => "varchar(128) NOT NULL default ''",
 ];
 
+/*
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_tabs'],
     'exclude' => true,
@@ -138,6 +139,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_tabs'] = [
     ],
     'sql' => 'blob NULL',
 ];
+*/
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['tab_template'] = [
     'label' => &$GLOBALS['TL_LANG']['tl_content']['tab_template'],
@@ -192,22 +194,6 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['tab_remember'] = [
  */
 class tl_content_tabcontrol extends Backend
 {
-    /**
-     * tl_content_tabcontrol constructor.
-     */
-    public function __construct()
-    {
-        parent::__construct();
-        System::importStatic('BackendUser', 'User');
-    }
-
-    /**
-     * Return all tabcontrol templates as array.
-     *
-     * @param DataContainer $dc
-     *
-     * @return array
-     */
     public function getTabcontrolTemplates(DataContainer $dc)
     {
         // Only look for a theme in the article's module (see #4808)

@@ -9,3 +9,6 @@ services:
 
     Plenta\TabControl\Controller\Contao\ContentElement\TabControlController:
         public: true
+
+    Plenta\TabControl\Controller\Contao\ContentElement\TabControlGroupController:
+        public: true
