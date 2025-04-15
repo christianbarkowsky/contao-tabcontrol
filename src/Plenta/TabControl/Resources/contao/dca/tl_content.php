@@ -198,7 +198,6 @@ class tl_content_tabcontrol extends Backend
     public function __construct()
     {
         parent::__construct();
-        System::importStatic('BackendUser', 'User');
     }
 
     /**
